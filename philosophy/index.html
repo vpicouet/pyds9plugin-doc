@@ -128,27 +128,47 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="2"><a href="#motivation" class="nav-link">Motivation</a>
+            <li class="nav-item" data-level="1"><a href="#motivation" class="nav-link">Motivation</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#existing-tools" class="nav-link">Existing tools</a>
+            <li class="nav-item" data-level="1"><a href="#existing-tools" class="nav-link">Existing tools</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#existing-tools-strengths-and-weaknesses" class="nav-link">Existing tools, strengths and weaknesses</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#the-need-for-collaborative-development" class="nav-link">The need for collaborative development</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#goals" class="nav-link">Goals</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#boosting-interaction-with-scientific-images" class="nav-link">Boosting interaction with scientific images</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#turning-a-visualization-software-into-an-image-processing-software" class="nav-link">Turning a visualization software into an image processing software</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#building-a-code-collaboration-catalyst" class="nav-link">Building a code collaboration catalyst</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#the-choice-of-saoimage-ds9" class="nav-link">The choice of SAOImage DS9</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#goals" class="nav-link">Goals</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="2"><a href="#the-choice-of-saoimage-ds9" class="nav-link">The choice of SAOImage DS9</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="2"><a href="#discussion-and-conclusion" class="nav-link">Discussion and conclusion</a>
+            <li class="nav-item" data-level="1"><a href="#discussion-and-conclusion" class="nav-link">Discussion and conclusion</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -157,7 +177,7 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h2 id="motivation">Motivation</h2>
+<h1 id="motivation">Motivation</h1>
 <p>Current fits viewer applications (<code>SAOImage DS9</code>, <code>Aladin</code>, <code>GINGA</code>,
 <code>Glue</code>) have been developed to optimize the visualization of
 astronomical images while keeping some interesting specificities:
@@ -203,8 +223,8 @@ available both on Pypi and Github, tries to gather a glimpse of all the
 possibilities that offers <code>DS9</code> extensibility so that it motivates
 astronomers exploring this development approach. This hybrid chapter
 aims at giving an overview of the achieved work.</p>
-<h2 id="existing-tools">Existing tools</h2>
-<h3 id="existing-tools-strengths-and-weaknesses">Existing tools, strengths and weaknesses</h3>
+<h1 id="existing-tools">Existing tools</h1>
+<h2 id="existing-tools-strengths-and-weaknesses">Existing tools, strengths and weaknesses</h2>
 <p>The different main existing software for image visualization/processing
 are <a href="https://sites.google.com/cfa.harvard.edu/saoimageds9">SAOImageDS9</a>,
 <a href="https://aladin.u-strasbg.fr/AladinDesktop/">Aladin</a>,
@@ -226,7 +246,7 @@ incorporate the different listed functionality as native features. Most
 of the extensions need to be written in JAVA, some in Python, and <code>DS9</code>
 allows to develop low-level plugins in basically any language as soon as
 it supports <code>XPA</code> or <code>SAMP</code> communication.</p>
-<h3 id="the-need-for-collaborative-development">The need for collaborative development</h3>
+<h2 id="the-need-for-collaborative-development">The need for collaborative development</h2>
 <p><code>DS9</code> lead developers remind that more bodies do not
 equal better results by citing Fred Brooks: "<em>the [software] design
 must proceed from one mind, or from a very small number of agreeing
@@ -263,9 +283,9 @@ analysis software: <code>GIMP</code>, <code>ImageJ</code>, <code>GINGA</code>, <
 <p class="admonition-title">Note</p>
 <p>A plugin is a software component or module designed to extend the functionality of an existing software application. The application architecture determines where and how plugins can be embedded (for example, reading or writing new formats, accessing and processing image data, etc.). Open-source software, in  contrast to closed-source packages, often relies on plugins to  foster contributions and expertise from the community</p>
 </div>
-<h2 id="goals">Goals</h2>
+<h1 id="goals">Goals</h1>
 <p>The goal is then to create a plugin that would fill the needs expressed above. The three different distant objectives that aim to make astronomers gain time are detailed below.</p>
-<h3 id="boosting-interaction-with-scientific-images">Boosting interaction with scientific images</h3>
+<h2 id="boosting-interaction-with-scientific-images">Boosting interaction with scientific images</h2>
 <p>The fact that astronomical data gets bigger is driving the way image
 software and pipelines are designed. It seems that the workforce is more
 directed towards developing specific applications (either
@@ -288,7 +308,7 @@ on trying to develop interactive features.</p>
 <p class="admonition-title">Note</p>
 <p>We call interaction a direct communication between the user and the software which is not only via the menu bar. All basic fits-viewers incorporate as native and interactive feature zooming, panning, rotating, changing scale limits. However, it could be pushed to the next level with, for instance, interaction with metadata (like regions of interest or catalogs), interactive detection and selection of sources, interactive plotting, and profile fitting, etc. Some work is ongoing to make some tools more interactive, but it is still in its infancy.</p>
 </div>
-<h3 id="turning-a-visualization-software-into-an-image-processing-software">Turning a visualization software into an image processing software</h3>
+<h2 id="turning-a-visualization-software-into-an-image-processing-software">Turning a visualization software into an image processing software</h2>
 <p>Another aspect is that among all the fits-viewers, a minor fraction
 allows some image processing (<code>GAIA</code> is the most advanced example but
 does not seem to gather a vast community, <code>Icy</code> for bio-images,
@@ -300,7 +320,7 @@ Incorporating these features inside these fits-viewers might be
 premature at this stage as it could break the software concept integrity
 but spending time developing them as a plugin seems essential to make
 scientists earn time in their research.</p>
-<h3 id="building-a-code-collaboration-catalyst">Building a code collaboration catalyst</h3>
+<h2 id="building-a-code-collaboration-catalyst">Building a code collaboration catalyst</h2>
 <p>A byproduct of such plugins would be that people would not need to
 reinvent the wheel each time they need to perform some basic image
 processing like a radial profile. Such a plugin could be written to
@@ -340,7 +360,7 @@ this possible the package:</p>
 <p>The plugin we present in this study is a naive attempt to try to
 initiate this tendency and gather a glimpse of the main possibilities
 that fits-viewers plugins can offer.</p>
-<h2 id="the-choice-of-saoimage-ds9">The choice of SAOImage DS9</h2>
+<h1 id="the-choice-of-saoimage-ds9">The choice of SAOImage DS9</h1>
 <p><a href="https://sites.google.com/cfa.harvard.edu/saoimageds9"><code>SAOImage DS9</code></a>
 is an astronomical imaging and data visualization application. It
 gathers all of the other essential pieces of a modern fits viewer. Its
@@ -371,7 +391,7 @@ ultra-simple extensibility with quasi no format requirement as it simply
 sends background <code>Shell</code> commands that can call any extension and
 control the GUI.</p>
 <p><code>DS9</code> then seemed the perfect software to experiment such a plugin.</p>
-<h2 id="discussion-and-conclusion">Discussion and conclusion</h2>
+<h1 id="discussion-and-conclusion">Discussion and conclusion</h1>
 <p>In this chapter, I tried to stress the need for astronomical image
 processing applications. I emphasize the different requirements of such
 an application and explain why Python extensions for already proven

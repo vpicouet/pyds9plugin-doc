@@ -128,13 +128,50 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#functionality" class="nav-link">Functionality</a>
+            <li class="nav-item" data-level="1"><a href="#important-features" class="nav-link">Important features</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#important-features" class="nav-link">Important features</a>
+            <li class="nav-item" data-level="2"><a href="#command-line-access" class="nav-link">Command line access</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#the-different-functions" class="nav-link">The different functions</a>
+            <li class="nav-item" data-level="2"><a href="#multi-image-and-multi-threaded-analysis" class="nav-link">Multi-image and multi-threaded analysis</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#python-interpreter" class="nav-link">Python interpreter</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#python-macros" class="nav-link">Python macros</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#vtk-3d-rendering" class="nav-link">VTK 3D rendering</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#interactive-profile-fitting" class="nav-link">Interactive profile fitting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#fits-file-organizer" class="nav-link">Fits file organizer</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#the-different-functions" class="nav-link">The different functions</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#generic-functions" class="nav-link">Generic functions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#instrumentation" class="nav-link">Instrumentation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#astronomical-software" class="nav-link">Astronomical software</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -145,9 +182,8 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="functionality">Functionality</h1>
-<h2 id="important-features">Important features</h2>
-<h3 id="command-line-access">Command line access</h3>
+<h1 id="important-features">Important features</h1>
+<h2 id="command-line-access">Command line access</h2>
 <p>As expressed above, <code>DS9</code> will execute a <code>Shell</code> command, which will
 call the package's functions. <code>DS9</code> allows prompting this command each
 time a function is launched through:
@@ -167,7 +203,7 @@ Functions can then be called from <code>DS9</code>, terminal or directly from
 Python using argv parameter:
 <span class="arithmatex">\(<span class="arithmatex">\(\verb! Python_command(argv="-p '/data/**/*.fits' -e 'ds9-=1'")!  \label{eq:Python}\)</span>\)</span></p>
 <p><img alt="caption" src="../fig/DS9Utils.jpg" /></p>
-<h3 id="multi-image-and-multi-threaded-analysis">Multi-image and multi-threaded analysis</h3>
+<h2 id="multi-image-and-multi-threaded-analysis">Multi-image and multi-threaded analysis</h2>
 <p><code>pyds9plugin</code> is, in essence, a quick-look plugin that is perfect for
 visualizing, exploring, analyzing, and processing the displayed image.
 However, it was essential to make it suitable for more important
@@ -184,7 +220,7 @@ multi-threading to run each image on a different thread. The number of
 processors to be used is accessible via <code>-N</code> or <code>--number_processors</code>
 argument. By default, the code will use the total number of processors
 of the machine minus 2. A video can be found .</p>
-<h3 id="python-interpreter">Python interpreter</h3>
+<h2 id="python-interpreter">Python interpreter</h2>
 <p>We added a Python interpreter to the extension. This allows directly
 applying Pythonic one-line transformations to the displayed image.</p>
 <p>We list below some of the numerous one-line possibilities that can, for
@@ -197,7 +233,7 @@ fast Fourier transform or auto-correlation.</p>
 <p><code>ds9[ds9&gt;np.percentile(ds9,99)]=np.nan</code></p>
 <p><code>ds9=abs(fftshift(fft2(ds9)))**2</code></p>
 <p><code>ds9=correlate2d(ds9,ds9,boundary='symm', mode='same')</code></p>
-<h3 id="python-macros">Python macros</h3>
+<h2 id="python-macros">Python macros</h2>
 <p>Because one line is short, it is possible to simply give the path of a
 Python file. For instance, giving the path of the code below
 interpolates masked values in the <code>DS9</code> frame and returns the new image
@@ -225,7 +261,15 @@ plugin several macros (in <code>DS9functions/macros</code>). Each macro (<code>F
 (compute and return the FFT of the <code>DS9</code> image, trim wcs images,
 interpolate masked values in the image, etc.) or a series of processing
 (background subtraction source extraction astrometric calibration)</p>
-<h3 id="vtk-3d-rendering">VTK 3D rendering</h3>
+<pre><code class="language-python">from astropy.convolution import interpolate_replace_nans, Gaussian2DKernel
+
+STD_DEV = 1
+while ~np.isfinite(ds9).all():
+  kernel = Gaussian2DKernel(x_stddev=STD_DEV, y_stddev=STD_DEV)
+  \texttt{DS9} = interpolate_replace_nans(ds9, kernel)
+  STD_DEV += 1
+</code></pre>
+<h2 id="vtk-3d-rendering">VTK 3D rendering</h2>
 <p>The Visualization Toolkit (<code>VTK</code>) is the leading open-source software
 for manipulating and displaying scientific data. It comes with
 state-of-the-art tools for 3D rendering, a suite of widgets for 3D
@@ -239,7 +283,7 @@ in 3D like through-focus or to explore the focus in the field.</p>
 <p><img alt="3D VTK rendering (see ). The different widgets in the bottom left corner allow to interact with the plotter and create animated
 GIFs." src="../fig/3d.jpg" /></p>
 <p><img alt="caption" src="../fig/3d3d.jpg" /></p>
-<h3 id="interactive-profile-fitting">Interactive profile fitting</h3>
+<h2 id="interactive-profile-fitting">Interactive profile fitting</h2>
 <p><code>DS9</code> incorporates the very useful possibility to interactively plot 1D
 profiles (can be tilted, stacked in the orthogonal direction, plot the
 third axis component, etc). This gives essential qualitative
@@ -271,7 +315,55 @@ any other user-defined functions.</p>
 <p>For each fitted parameter, be sure to define a list as default argument
 as it will be used to define the lower and upper bounds of the widget
 fitter.</p>
-<p><img alt="caption" src="../fig/fit.jpg" /></p>
+<p><img alt="caption" src="../fig/fit2d.jpg" /></p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Constant</td>
+<td><span class="arithmatex">\(y = a\)</span></td>
+</tr>
+<tr>
+<td>Slope</td>
+<td><span class="arithmatex">\(y=a \times x\)</span></td>
+</tr>
+<tr>
+<td>Exponential</td>
+<td><span class="arithmatex">\(y=a\times e^{-\frac{x}{b}}\)</span></td>
+</tr>
+<tr>
+<td>Logarithmic</td>
+<td><span class="arithmatex">\(y=a + b\times ln(x-c)\)</span></td>
+</tr>
+<tr>
+<td>Double exponential</td>
+<td><span class="arithmatex">\(y=a\times e^{-\frac{x}{b}} + c\times e^{-\frac{x}{d}}\)</span></td>
+</tr>
+<tr>
+<td>Gaussian</td>
+<td><span class="arithmatex">\(y=a \times e^{-(\frac{c-b}{2*c})^2}\)</span></td>
+</tr>
+<tr>
+<td>Moffat</td>
+<td><span class="arithmatex">\(y=a\times (1 + \frac{x-b}{c}^{2})^{-d}\)</span></td>
+</tr>
+<tr>
+<td>Voight</td>
+<td><span class="arithmatex">\(y=a \times\frac{  \mathbb{R}\left ( wofz \left (  \frac{(x-b) \gamma i}{c\sqrt{\pi}} \right ) \right )  }{  \mathbb{R}\left ( wofz \left (  \frac{x \gamma i}{c\sqrt{\pi}} \right ) \right ) }\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Fitting functions of the profile fitter. The first four functions
+are the possible backgrounds to fit. On top of this background, you
+can add as many Gaussian/Moffat/Voigt features as you want. The wofz
+function in the last line is the Faddeeva function
+<span class="arithmatex">\(wofz(z)=e^{-z^2} \times (1-erf(-iz) )\)</span> accessible in Python via
+scipy.special.wofz</p>
 <!-- :::  
   Function             Formula
   -------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -295,7 +387,8 @@ fitter.</p>
 <p>If no plot neither catalog is given, the window will work as a regular
 plotter, where the user can plot its own function and change the
 parameters.</p>
-<h3 id="fits-file-organizer">Fits file organizer</h3>
+<p><img alt="caption" src="../fig/fit.jpg" /></p>
+<h2 id="fits-file-organizer">Fits file organizer</h2>
 <p>This final functionality is a fits organizer, divided into two functions
 (Create header database and Filtering and organizing images). The first
 function generates from the input images (regular expression) a catalog
@@ -319,15 +412,19 @@ Python command to append image estimators to the output header catalog.
 For instance, the following piece of code add to the header database
 some information about the image (column/line correlation, saturated
 pixels fraction, number of cosmic rays, etc.):</p>
-<pre><code class="language-python">from astropy.convolution import interpolate_replace_nans, Gaussian2DKernel
+<pre><code class="language-python">import numpy as np
 
-STD_DEV = 1
-while ~np.isfinite(ds9).all():
-  kernel = Gaussian2DKernel(x_stddev=STD_DEV, y_stddev=STD_DEV)
-  \texttt{DS9} = interpolate_replace_nans(ds9, kernel)
-  STD_DEV += 1
+SATURATION = 2 ** 16 -1
+data = fitsfile[0].data
+columns = np.nanmean(data, axis=1)
+lines = np.nanmean(data, axis=0)
+table['median'] = np.nanmedian(data)
+table[&quot;Lines_difference&quot;] = np.nanmedian(lines[::2]) - np.nanmedian(lines[1::2])
+table[&quot;Columns_difference&quot;] = np.nanmedian(columns[::2]) - np.nanmedian(columns[1::2])
+table[&quot;SaturatedPixels&quot;] = 100 * np.mean(data &gt; SATURATION)
+table[&quot;CosmicRays&quot;] = count_cosmic_rays(data)
 </code></pre>
-<p><img alt="caption" src="../fig/filter_files.jpg" /></p>
+<p><img alt="caption" src="../fig/files.jpg" /></p>
 <p>The output header database can be used with the second function, which
 filters the images and organizes them following organizational rules.
 This function allows creating subsets of images verifying some header
@@ -343,9 +440,9 @@ figure <a href="#ds9/filter_files.jpg">[ds9/filter_files.jpg]</a>
 only generates aliases and does not move any original files. The header
 database and organized aliases are respectively saved in
 <span class="arithmatex">\(\sim\)</span><code>/DS9QuickLookPlugIn/HeaderDataBase</code> and
-<span class="arithmatex">\(\sim\)</span><code>/DS9QuickLookPlugIn/subsets</code>.
-<img alt="caption" src="../fig/files.jpg" /></p>
-<h2 id="the-different-functions">The different functions</h2>
+<span class="arithmatex">\(\sim\)</span><code>/DS9QuickLookPlugIn/subsets</code>.</p>
+<p><img alt="caption" src="../fig/filter_files.jpg" /></p>
+<h1 id="the-different-functions">The different functions</h1>
 <p>The functions are divided into three categories to help the organization
 (see
 Figure <a href="#ds9/commands.jpg">[ds9/commands.jpg]</a>
@@ -367,7 +464,7 @@ command, can be run on several images, and each analysis will run on a
 different thread (See
 section <a href="#Multi-image and multi-threaded analysis">3.1.2</a>)</p>
 <p><img alt="caption" src="../fig/commands.jpg" /></p>
-<h3 id="generic-functions">Generic functions</h3>
+<h2 id="generic-functions">Generic functions</h2>
 <p>This series of very general functions aims at filling some gaps of <code>DS9</code>
 with stable generic functions (fitting, region-based functions), gaining
 some time with key functions: (change display settings/lock parameters),
@@ -441,7 +538,7 @@ etc.</p>
 <img alt="caption" src="../fig/python.jpg" /></p>
 </li>
 </ul>
-<h3 id="instrumentation">Instrumentation</h3>
+<h2 id="instrumentation">Instrumentation</h2>
 <p>This series of functions aims to assist instrument researchers during
 assembly and testing with through-focus, light curves, centering,
 radial, energy profile analysis, etc. More complex but general
@@ -495,7 +592,7 @@ transform, smoothing, masking, interpolation, noise measurements, etc.</p>
 <p><img alt="caption" src="../fig/fit2d.jpg" />
 <img alt="caption" src="../fig/radial.jpg" />
 <img alt="caption" src="../fig/throughfocus.jpg" /></p>
-<h3 id="astronomical-software">Astronomical software</h3>
+<h2 id="astronomical-software">Astronomical software</h2>
 <p>The goal of this series of functions is to link the most essential
 astronomical image processing software like the astromatic suite
 (<code>SExtractor</code>, <code>Stiff</code>, <code>Swarp</code>, <code>PSFex</code> - need to be installed) and
