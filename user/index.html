@@ -47,6 +47,10 @@
 <li>
     <a href="../feature/" class="dropdown-item">Important features</a>
 </li>
+                                    
+<li>
+    <a href="../videos/" class="dropdown-item">Videos</a>
+</li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -130,24 +134,27 @@ abides by the rules of free software distribution. The package has been
 released on <a href="https://pypi.org/project/pyds9plugin/">https://pypi.org</a>
 and is being reviewed to become an <a href="https://www.astropy.org/affiliated/">astropy affiliated
 packages</a>. The source code is
-available on GitHub:\
-<code>git clone https://GitHub.com/vpicouet/DS9functions.git</code></p>
+available on GitHub:</p>
+<p><code>git clone https://GitHub.com/vpicouet/DS9functions.git</code></p>
 <p>People can contribute to the code via GitHub and fill issues with
 Github's issue tracker. <code>pyds9plugin</code> works with <code>DS9</code> with a version
 equal to or higher than 8.2. The extension can be installed via the
-terminal:\
-<code>pip install -v pyds9plugin</code>\
-or\
-<code>Python setup.py install</code></p>
+terminal:</p>
+<p><code>pip install -v pyds9plugin</code></p>
+<p>or</p>
+<p><code>Python setup.py install</code></p>
 <p>The package can also be installed inside a <a href="https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">virtual
 environment</a>.
 The package will be accessible via <code>DS9Utils</code> keyword in the terminal.
-To load the analysis file in <code>DS9</code> run:\
-<code>DS9Utils LoadDS9QuickLookPlugin</code>\
-If the file can not be added automatically, instructions will appear to
-add it manually.</p>
+To load the analysis file in <code>DS9</code> run:</p>
+<p><code>DS9Utils LoadDS9QuickLookPlugin</code></p>
+<p>If the file can not be added automatically, instructions will appear to add it manually.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>To do so copy the path returned by the previous command and add it to DS9 preference analysis section</p>
+</div>
 <p><strong>Prerequisites and dependence:</strong> <code>pyds9plugin</code> runs under Python
-versions $&gt;3.5$. Note that as a minimum, any user will need to have at
+versions <span class="arithmatex">\(&gt;3.5\)</span>. Note that as a minimum, any user will need to have at
 least installed <a href="https://GitHub.com/ericmandel/pyds9">pyds9</a>,
 <a href="https://NumPy.org"><code>NumPy</code></a>, <a href="https://www.scipy.org"><code>scipy</code></a>,
 <a href="https://www.astropy.org"><code>astropy</code></a>,
@@ -159,8 +166,7 @@ least installed <a href="https://GitHub.com/ericmandel/pyds9">pyds9</a>,
 <a href="https://matplotlib.org"><code>matplotlib</code></a> and
 <a href="https://GitHub.com/glentner/dataphile"><code>dataphile</code></a>.</p>
 <p>For full functionality the
-<a href="https://astromatic.net/software/">astromatic</a> suite (<code>SExtractor</code>,
-<code>Swarp</code>, <code>Stiff</code> and <code>PSFex</code>) is also needed.</p>
+<a href="https://astromatic.net/software/">astromatic</a> suite (<code>Swarp</code>, <code>Stiff</code> and <code>PSFex</code>) is also needed.</p>
 <h2 id="tutorials">Tutorials</h2>
 <p>The plugin incorporates four tutorials to help the user understand how
 it works and guide him step by step throughout all the functions via
@@ -182,17 +188,20 @@ needed modules. The code follows PEP 8 guide style.</p>
 <p class="admonition-title">Warning</p>
 <p><code>Pyds9</code> package is not available on windows.</p>
 </div>
-<h3 id="known-issues">Known issues</h3>
-<p>No Next window in tutorials:</p>
-<p>:   This means that there was an error at the install of PyQt5. On
+<!--
+### Known issues
+
+No Next window in tutorials:
+
+:   This means that there was an error at the install of PyQt5. On
     Linux, refer to that
-    <a href="https://www.programmersought.com/article/30566120835/">page</a> to
+    [page](https://www.programmersought.com/article/30566120835/) to
     solve the issue. On mac you can uninstall pyds9plugin, re-install
     the required packages using
-    <a href="https://GitHub.com/mamba-org/mamba">mamba</a>:\
-    <code>mamba install NumPy matplotlib astropy tqdm pyvista  PyQt</code>\
+    [mamba](https://GitHub.com/mamba-org/mamba):\
+    ` mamba install NumPy matplotlib astropy tqdm pyvista  PyQt `\
     and then re-install pyds9plugin:\
-    <code>pip install -v pyds9plugin</code>\</p></div>
+    ` pip install -v pyds9plugin `\ --></div>
             </div>
         </div>
 
@@ -205,6 +214,9 @@ needed modules. The code follows PEP 8 guide style.</p>
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
         <script src="../js/base.js" defer></script>
+        <script src="../javascripts/mathjax.js" defer></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
         <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">

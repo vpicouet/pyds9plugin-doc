@@ -47,6 +47,10 @@
 <li>
     <a href="../feature/" class="dropdown-item">Important features</a>
 </li>
+                                    
+<li>
+    <a href="../videos/" class="dropdown-item">Videos</a>
+</li>
                                 </ul>
                             </li>
                             <li class="dropdown active">
@@ -75,7 +79,7 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../feature/" class="nav-link">
+                                <a rel="prev" href="../videos/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
@@ -192,8 +196,8 @@ Figure <a href="#ds9/softs2.jpg">[ds9/softs2.jpg]</a>
  we sum up each software approach and
 different characteristics as well as their different strengths and
 weaknesses in terms of image visualization and processing. On a total of
-about $127\,000$ downloads, <code>Aladin</code>, <code>DS9</code>, <code>GlueViz</code>, and <code>Ginga</code>
-represent respectively $36\%$, $28\%$, $20\%$, and $8\%$ percent of the
+about <span class="arithmatex">\(127\,000\)</span> downloads, <code>Aladin</code>, <code>DS9</code>, <code>GlueViz</code>, and <code>Ginga</code>
+represent respectively <span class="arithmatex">\(36\%\)</span>, <span class="arithmatex">\(28\%\)</span>, <span class="arithmatex">\(20\%\)</span>, and <span class="arithmatex">\(8\%\)</span> percent of the
 total downloads.
 <img alt="caption" src="../fig/softs2.jpg" /></p>
 <p>There seems to be some consensus on the interest of plugins to extend
@@ -209,9 +213,9 @@ equal better results by citing Fred Brooks: "<em>the [software] design
 must proceed from one mind, or from a very small number of agreeing
 resonant minds</em>". Even though they believe that conceptual integrity
 requires a small team of developers, they face an expanding pressure due
-to the success of <code>DS9</code> and confess spending $80\%$ of their time in
+to the success of <code>DS9</code> and confess spending <span class="arithmatex">\(80\%\)</span> of their time in
 supporting users and maintaining/enhancing existing capabilities which
-leaves them with only $20\%$ of time to innovate on new functionality.
+leaves them with only <span class="arithmatex">\(20\%\)</span> of time to innovate on new functionality.
 On the other side, I saw significant efforts in different teams to
 develop project-related processing tools and pipelines to analyze
 images, but they often are too specific to be re-used by the community
@@ -222,17 +226,13 @@ gains maturity, it seems that the best compromise is the development of
 plugins by the community:</p>
 <ul>
 <li>
-<p>This allows important and free innovation that will not break the
-    software's concept/purpose</p>
+<p>This allows important and free innovation that will not break the software's concept/purpose</p>
 </li>
 <li>
-<p>Best interesting features/innovations that will emerge by themselves
-    can then be merged into the initial software (as it has already been
-    done for <code>DS9</code>, <code>GAIA</code>)</p>
+<p>Best interesting features/innovations that will emerge by themselves can then be merged into the initial software (as it has already been done for <code>DS9</code>, <code>GAIA</code>)</p>
 </li>
 <li>
-<p>This is particularly true in the open astronomy community where
-    collaborative development becomes extremely popular</p>
+<p>This is particularly true in the open astronomy community where collaborative development becomes extremely popular</p>
 </li>
 </ul>
 <p>This modularity and plugin philosophy is used by the majority of the top
@@ -338,7 +338,7 @@ well-organized effort to develop significant extensions that would
 finally, years after years, converge towards a stable/rapid/configurable
 DS9-affiliated package. The important strengths of <code>DS9</code> that governed
 our choice are:</p>
-<p><strong>Popularity:</strong> with $\sim35$K downloads a year, <code>DS9</code> belongs to the
+<p><strong>Popularity:</strong> with <span class="arithmatex">\(\sim35\)</span>K downloads a year, <code>DS9</code> belongs to the
 top two leaders in image visualization for astronomy. It also has the
 closest purpose to what we aim to develop (more image-focused than
 Aladin, even though it similarly accesses catalogs). It has a large
@@ -368,6 +368,9 @@ control the GUI.</p>
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
         <script src="../js/base.js" defer></script>
+        <script src="../javascripts/mathjax.js" defer></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
         <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">

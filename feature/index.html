@@ -47,6 +47,10 @@
 <li>
     <a href="./" class="dropdown-item active">Important features</a>
 </li>
+                                    
+<li>
+    <a href="../videos/" class="dropdown-item">Videos</a>
+</li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -80,7 +84,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../philosophy/" class="nav-link">
+                                <a rel="next" href="../videos/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -139,7 +143,7 @@ the next major feature: multi-image analysis.</p>
 <p>All functions arguments are parsed through the <code>argparse</code> module.
 Functions can then be called from <code>DS9</code>, terminal or directly from
 Python using argv parameter:
-$$\verb! Python_command(argv="-p '/data/*<em>/</em>.fits' -e 'ds9-=1'")!  \label{eq:Python}$$</p>
+<span class="arithmatex">\(<span class="arithmatex">\(\verb! Python_command(argv="-p '/data/**/*.fits' -e 'ds9-=1'")!  \label{eq:Python}\)</span>\)</span></p>
 <p><img alt="caption" src="../fig/DS9Utils.jpg" /></p>
 <h3 id="multi-image-and-multi-threaded-analysis">Multi-image and multi-threaded analysis</h3>
 <p><code>pyds9plugin</code> is, in essence, a quick-look plugin that is perfect for
@@ -150,7 +154,7 @@ processing functions can be launched on a set of images by specifying
 the path of all the images using regular expression:</p>
 <p><code>DS9Utils &lt;function&gt; [-o OPTIONAL] --path "/data/**/*.fits"</code></p>
 <p>This feature allows, for instance, to spend important time optimizing
-interactively the $\sim50$ parameters of source extraction and add a
+interactively the <span class="arithmatex">\(\sim50\)</span> parameters of source extraction and add a
 whole image folder to the analysis command to process all the images
 when the parameters have been fine-tuned.</p>
 <p>To take advantage of modern computer architectures, it uses
@@ -307,8 +311,8 @@ filters the images and organizes them following organizational rules.
 This function allows creating subsets of images verifying some header
 conditions. For instance, all images created after the 12th of September
 2020 that have a positive EMGAIN or an exposure higher than 100 seconds
-can be recovered with this condition: $$\renewcommand{\theequation}{6}
-\verb! (EMGAIN &gt; 0 | EXPOSURE &gt;100) &amp; CreationTime&gt;200912 !  \label{eq:selection}$$</p>
+can be recovered with this condition: <span class="arithmatex">\(<span class="arithmatex">\(\renewcommand{\theequation}{6}
+\verb! (EMGAIN &gt; 0 | EXPOSURE &gt;100) &amp; CreationTime&gt;200912 !  \label{eq:selection}\)</span>\)</span></p>
 <p>The files are then directly organized in the file system with an
 arborescence following the column names. For instance, by giving
 <code>EMGAIN,EXPOSURE</code>, all files will get organized as shown in
@@ -316,8 +320,8 @@ figure <a href="#ds9/filter_files.jpg">[ds9/filter_files.jpg]</a>
 . A video can be found . The function
 only generates aliases and does not move any original files. The header
 database and organized aliases are respectively saved in
-$\sim$<code>/DS9QuickLookPlugIn/HeaderDataBase</code> and
-$\sim$<code>/DS9QuickLookPlugIn/subsets</code>.
+<span class="arithmatex">\(\sim\)</span><code>/DS9QuickLookPlugIn/HeaderDataBase</code> and
+<span class="arithmatex">\(\sim\)</span><code>/DS9QuickLookPlugIn/subsets</code>.
 <img alt="caption" src="../fig/files.jpg" /></p>
 <h2 id="the-different-functions">The different functions</h2>
 <p>The functions are divided into three categories to help the organization
@@ -427,7 +431,7 @@ transform, smoothing, masking, interpolation, noise measurements, etc.</p>
 <ul>
 <li>
 <p><strong>Centering (C)</strong> Centers <code>DS9</code> region encircling a spot. Five
-    centroid methods are available: maximum, $2\times1$1D fittin, 2D
+    centroid methods are available: maximum, <span class="arithmatex">\(2\times1\)</span>1D fittin, 2D
     fitting, barycenter).</p>
 </li>
 <li>
@@ -522,6 +526,9 @@ offer them a parameter GUI.</p>
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
         <script src="../js/base.js" defer></script>
+        <script src="../javascripts/mathjax.js" defer></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
         <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
