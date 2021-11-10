@@ -16,6 +16,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://vpicouet.github.io/pyds9plugin-doc/install/</loc>
+         <lastmod>2021-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://vpicouet.github.io/pyds9plugin-doc/license/</loc>
          <lastmod>2021-11-10</lastmod>
          <changefreq>daily</changefreq>
@@ -32,6 +37,26 @@
     </url>
     <url>
          <loc>https://vpicouet.github.io/pyds9plugin-doc/videos/</loc>
+         <lastmod>2021-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://vpicouet.github.io/pyds9plugin-doc/videos_generic/</loc>
+         <lastmod>2021-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://vpicouet.github.io/pyds9plugin-doc/videos_instru/</loc>
+         <lastmod>2021-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://vpicouet.github.io/pyds9plugin-doc/videos_multi/</loc>
+         <lastmod>2021-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://vpicouet.github.io/pyds9plugin-doc/videos_soft/</loc>
          <lastmod>2021-11-10</lastmod>
          <changefreq>daily</changefreq>
     </url>

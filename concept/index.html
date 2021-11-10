@@ -41,6 +41,10 @@
                                 <ul class="dropdown-menu">
                                     
 <li>
+    <a href="../install/" class="dropdown-item">Installation</a>
+</li>
+                                    
+<li>
     <a href="../user/" class="dropdown-item">Tutorials</a>
 </li>
                                     
@@ -48,9 +52,27 @@
     <a href="../feature/" class="dropdown-item">Important features</a>
 </li>
                                     
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Videos</a>
+    <ul class="dropdown-menu">
+            
 <li>
-    <a href="../videos/" class="dropdown-item">Videos</a>
+    <a href="../videos_multi/" class="dropdown-item">Multi-image processing</a>
 </li>
+            
+<li>
+    <a href="../videos_instru/" class="dropdown-item">Instrumentation</a>
+</li>
+            
+<li>
+    <a href="../videos_soft/" class="dropdown-item">Software</a>
+</li>
+            
+<li>
+    <a href="../videos_generic/" class="dropdown-item">Generic</a>
+</li>
+    </ul>
+  </li>
                                 </ul>
                             </li>
                             <li class="dropdown active">
@@ -122,11 +144,6 @@
             </li>
               </ul>
             </li>
-            
-            <li class="nav-item" data-level="1"><a href="#discussion-and-conclusion" class="nav-link">Discussion and conclusion</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
         </ul>
     </div>
 </div></div>
@@ -139,14 +156,10 @@
 quick-look image processing. It aims to extract quantifiable information
 from imaging datasets with improved interaction. The plugin processing
 functions can then be generalized automatically to a set of images to
-turn the quick-look tool into a multiprocessing pipeline
-(Section <a href="#Multi-image and multi-threaded analysis">3.1.2</a>
-).</p>
+turn the quick-look tool into a multiprocessing pipeline.</p>
 <p>It enables new users, from undergraduate students to full-time
 researchers, to actively interact (process, model, plot, etc.) with
-astronomical image data with one integrated software package. The three
-main goals of the plugin are defined in
-Section <a href="#Goals">1.3</a>. This
+astronomical image data with one integrated software package. This
 package, available both on Pypi and
 <a href="https://github.com/vpicouet/pyds9plugin">GitHub</a>, has been extensively
 used within the FIREBall project and for CLAUDS catalogs generation.
@@ -158,26 +171,16 @@ document to present some functionality are all gathered
 <h2 id="the-way-it-works">The way it works</h2>
 <p><code>DS9</code> incorporates the possibility to load extensions via an <em>analysis
 file</em>. When the plugin is installed and the <em>analysis file</em> loaded into
-the <code>DS9</code> analysis menu (see
-Section <a href="#Installation">4.1</a>
-), the extension can be used. The <em>analysis
+the <code>DS9</code> analysis menu, the extension can be used. The <em>analysis
 file</em> is the interface linking <code>DS9</code> GUI with the plugin's functions.
-This file determines what menu is created within <code>DS9</code>
-(Figure <a href="#ds9/command_finder.jpg">[ds9/command_finder.jpg]</a>
-), what parameters windows each
+This file determines what menu is created within <code>DS9</code>, what parameters windows each
 function launches, and what <code>Shell</code> command is interpreted. An example
-parameter window is shown in
-Figure. <a href="#ds9/params.jpg">[ds9/params.jpg]</a>
-.</p>
-<p>Each <code>pyds9plugin</code> function is stored under <code>DS9Utils</code> (see
-Section <a href="#Command line access">3.1.1</a>
-) access point, which links to
+parameter window is shown in next Figure.</p>
+<p>Each <code>pyds9plugin</code> function is stored under <code>DS9Utils</code> access point, which links to
 <code>pyds9plugin.DS9Utils</code> module. Then command lines begin by <code>DS9Utils</code>
 followed by the function to be called and its arguments. <code>pyds9plugin</code>
 will then communicate, control, and exchange data with <code>DS9</code> GUI via
-<code>pyds9</code> package. The way the extension operates is illustrated in
-Figure <a href="#ds9/work.jpg">[ds9/work.jpg]</a>
-.</p>
+<code>pyds9</code> package. The way the extension operates is illustrated in next.</p>
 <p><img alt="caption" src="../fig/work.jpg" /></p>
 <h3 id="communication">Communication</h3>
 <p>Within the <code>DS9</code> program, the <code>XPA</code> (X Public Access) messaging system
@@ -200,14 +203,9 @@ that will then call the plugin.</p>
 <p>Navigating through the list of <code>DS9Utils</code> functions can be quite
 cumbersome for newcomers. <code>OSX</code> built-in Command Finder / Launcher
 provides an expeditive alternative that allows retrieving commands
-extremely fast (see
-Figure <a href="#ds9/command_finder.jpg">[ds9/command_finder.jpg]</a>
-).</p>
+extremely fast.</p>
 <p>Some fundamental functions are available through shortcuts to gain time.
-The shortcuts are noted between parenthesis next to the function's name
-(Section <a href="#The different functions">3.2</a>
-). The functions having a shortcut
-are: Open (o), lock (l), radial profile (r).</p>
+The shortcuts are noted between parenthesis next to the function's name. The functions having a shortcut are: Open (o), lock (l), radial profile (r).</p>
 <p><img alt="caption" src="../fig/commands.jpg" /></p>
 <p><img alt="caption" src="../fig/command_finder.jpg" /></p>
 <h2 id="logging-and-verbosity">Logging and verbosity</h2>
@@ -217,26 +215,7 @@ error, the error message will pop up. If you run the same command from
 the terminal, you will have, in addition, all the verbosity from
 <code>pyds9plugin</code>. On top of that, all the logging is saved in
 <span class="arithmatex">\(\sim\)</span><code>/DS9QuickLookPlugIn/pyds9plugin_activity.log</code> whether the
-function is launched from the terminal or <code>DS9</code> user interface.</p>
-<h1 id="discussion-and-conclusion">Discussion and conclusion</h1>
-<p>In this chapter, I tried to stress the need for astronomical image
-processing applications. I emphasize the different requirements of such
-an application and explain why Python extensions for already proven
-visualization software represent an exciting approach to address this
-need. Based on this, I introduced <code>pyds9plugin</code>, a scientific project I
-developed to illustrate this approach. This plugin has been developed
-from the ground up, paying attention to three particular aspects:
-addressing the need for image processing, enhancing the interaction
-between the user and the data, and catalyzing collaboration for
-processing functions.</p>
-<p>Writing <code>DS9</code> plugins is an excellent way to develop data analysis
-pipelines and quality assurance tasks by leveraging the combination of
-the very efficient <code>DS9</code> application and the burgeoning number of
-open-source astronomical Python modules.</p>
-<p><code>pyds9plugin</code> gathers a glimpse of all possibilities offered by <code>DS9</code>
-and stays, for now, a test bench to present such an approach. Even
-though it still has a considerable number of challenges to face:
-convince the future users, converge towards research-grade processing, scalability to larger datasets, etc., this chapter shows the ease of such an approach and its numerous benefits. Therefore, implementing processing codes this way generates a pretty high return on investment.</p></div>
+function is launched from the terminal or <code>DS9</code> user interface.</p></div>
             </div>
         </div>
 

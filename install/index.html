@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="https://vpicouet.github.io/pyds9plugin-doc/license/">
+        <link rel="canonical" href="https://vpicouet.github.io/pyds9plugin-doc/install/">
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>License - pyds9plugin doc</title>
+        <title>Installation - pyds9plugin doc</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -36,12 +36,12 @@
                             <li class="navitem">
                                 <a href=".." class="nav-link">Home</a>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Guide <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="../install/" class="dropdown-item">Installation</a>
+    <a href="./" class="dropdown-item active">Installation</a>
 </li>
                                     
 <li>
@@ -75,7 +75,7 @@
   </li>
                                 </ul>
                             </li>
-                            <li class="dropdown active">
+                            <li class="dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
@@ -88,7 +88,7 @@
 </li>
                                     
 <li>
-    <a href="./" class="dropdown-item active">License</a>
+    <a href="../license/" class="dropdown-item">License</a>
 </li>
                                 </ul>
                             </li>
@@ -101,12 +101,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../concept/" class="nav-link">
+                                <a rel="prev" href=".." class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" class="nav-link disabled">
+                                <a rel="next" href="../user/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -127,37 +127,64 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#documentation" class="nav-link">Documentation</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#installation" class="nav-link">Installation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-<p>vincent@picouet.fr</p>
-<p>This software is a computer program whose purpose is to perform quicklook
-image processing and analysis. It can ionteract with SAOImage DS9 Software
-when loaded as an extension.</p>
-<p>This software is governed by the CeCILL-B license under French law and
-abiding by the rules of distribution of free software.  You can  use,
-modify and/ or redistribute the software under the terms of the CeCILL-B
-license as circulated by CEA, CNRS and INRIA at the following URL
-"http://www.cecill.info".</p>
-<p>As a counterpart to the access to the source code and  rights to copy,
-modify and redistribute granted by the license, users are provided only
-with a limited warranty  and the software's author,  the holder of the
-economic rights,  and the successive licensors  have only  limited
-liability.</p>
-<p>In this respect, the user's attention is drawn to the risks associated
-with loading,  using,  modifying and/or developing or reproducing the
-software by the user in light of its specific status of free software,
-that may mean  that it is complicated to manipulate,  and  that  also
-therefore means  that it is reserved for developers  and  experienced
-professionals having in-depth computer knowledge. Users are therefore
-encouraged to load and test the software's suitability as regards their
-requirements in conditions enabling the security of their systems and/or
-data to be ensured and,  more generally, to use and operate it in the
-same conditions as regards security.</p>
-<p>The fact that you are presently reading this means that you have had
-knowledge of the CeCILL-B license and that you accept its terms.</p></div>
+<h1 id="documentation">Documentation</h1>
+<h2 id="installation">Installation</h2>
+<p><code>pyds9plugin</code> is governed by the CeCILL-B license under French law and
+abides by the rules of free software distribution. The package has been
+released on <a href="https://pypi.org/project/pyds9plugin/">https://pypi.org</a>
+and is being reviewed to become an <a href="https://www.astropy.org/affiliated/">astropy affiliated
+packages</a>. The source code is
+available on GitHub:</p>
+<p><code>git clone https://GitHub.com/vpicouet/DS9functions.git</code></p>
+<p>People can contribute to the code via GitHub and fill issues with
+Github's issue tracker. <code>pyds9plugin</code> works with <code>DS9</code> with a version
+equal to or higher than 8.2. The extension can be installed via the
+terminal:</p>
+<p><code>pip install -v pyds9plugin</code></p>
+<p>or</p>
+<p><code>Python setup.py install</code></p>
+<p>The package can also be installed inside a <a href="https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">virtual
+environment</a>.
+The package will be accessible via <code>DS9Utils</code> keyword in the terminal.
+To load the analysis file in <code>DS9</code> run:</p>
+<p><code>DS9Utils LoadDS9QuickLookPlugin</code></p>
+<p>If the file can not be added automatically, instructions will appear to add it manually.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>To do so copy the path returned by the previous command and add it to DS9 preference analysis section</p>
+</div>
+<p><strong>Prerequisites and dependence:</strong> <code>pyds9plugin</code> runs under Python
+versions <span class="arithmatex">\(&gt;3.5\)</span>. Note that as a minimum, any user will need to have at
+least installed <a href="https://GitHub.com/ericmandel/pyds9">pyds9</a>,
+<a href="https://NumPy.org"><code>NumPy</code></a>, <a href="https://www.scipy.org"><code>scipy</code></a>,
+<a href="https://www.astropy.org"><code>astropy</code></a>,
+<a href="https://docs.Python.org/3/library/argparse.html"><code>argparse</code></a>,
+<a href="https://docs.pyvista.org"><code>pyvista</code></a>, <a href="https://tqdm.GitHub.io"><code>tqdm</code></a>,
+<a href="https://docs.Python.org/fr/3/library/datetime.html"><code>datetime</code></a>,
+<a href="https://pandas.pydata.org"><code>pandas</code></a>,
+<a href="https://pypi.org/project/PyQt5/"><code>PyQt5</code></a>,
+<a href="https://matplotlib.org"><code>matplotlib</code></a> and
+<a href="https://GitHub.com/glentner/dataphile"><code>dataphile</code></a>.</p>
+<p>For full functionality the
+<a href="https://astromatic.net/software/">astromatic</a> suite (<code>Swarp</code>, <code>Stiff</code> and <code>PSFex</code>) is also needed.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>Pyds9</code> package is not available on windows.</p>
+</div></div>
             </div>
         </div>
 

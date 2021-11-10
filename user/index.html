@@ -41,6 +41,10 @@
                                 <ul class="dropdown-menu">
                                     
 <li>
+    <a href="../install/" class="dropdown-item">Installation</a>
+</li>
+                                    
+<li>
     <a href="./" class="dropdown-item active">Tutorials</a>
 </li>
                                     
@@ -48,9 +52,27 @@
     <a href="../feature/" class="dropdown-item">Important features</a>
 </li>
                                     
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Videos</a>
+    <ul class="dropdown-menu">
+            
 <li>
-    <a href="../videos/" class="dropdown-item">Videos</a>
+    <a href="../videos_multi/" class="dropdown-item">Multi-image processing</a>
 </li>
+            
+<li>
+    <a href="../videos_instru/" class="dropdown-item">Instrumentation</a>
+</li>
+            
+<li>
+    <a href="../videos_soft/" class="dropdown-item">Software</a>
+</li>
+            
+<li>
+    <a href="../videos_generic/" class="dropdown-item">Generic</a>
+</li>
+    </ul>
+  </li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -79,7 +101,7 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href=".." class="nav-link">
+                                <a rel="prev" href="../install/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
@@ -106,20 +128,8 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#documentation" class="nav-link">Documentation</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#installation" class="nav-link">Installation</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
             <li class="nav-item" data-level="2"><a href="#tutorials" class="nav-link">Tutorials</a>
               <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#performance-and-maintainability" class="nav-link">Performance and maintainability</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
               </ul>
             </li>
         </ul>
@@ -127,46 +137,6 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="documentation">Documentation</h1>
-<h2 id="installation">Installation</h2>
-<p><code>pyds9plugin</code> is governed by the CeCILL-B license under French law and
-abides by the rules of free software distribution. The package has been
-released on <a href="https://pypi.org/project/pyds9plugin/">https://pypi.org</a>
-and is being reviewed to become an <a href="https://www.astropy.org/affiliated/">astropy affiliated
-packages</a>. The source code is
-available on GitHub:</p>
-<p><code>git clone https://GitHub.com/vpicouet/DS9functions.git</code></p>
-<p>People can contribute to the code via GitHub and fill issues with
-Github's issue tracker. <code>pyds9plugin</code> works with <code>DS9</code> with a version
-equal to or higher than 8.2. The extension can be installed via the
-terminal:</p>
-<p><code>pip install -v pyds9plugin</code></p>
-<p>or</p>
-<p><code>Python setup.py install</code></p>
-<p>The package can also be installed inside a <a href="https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">virtual
-environment</a>.
-The package will be accessible via <code>DS9Utils</code> keyword in the terminal.
-To load the analysis file in <code>DS9</code> run:</p>
-<p><code>DS9Utils LoadDS9QuickLookPlugin</code></p>
-<p>If the file can not be added automatically, instructions will appear to add it manually.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>To do so copy the path returned by the previous command and add it to DS9 preference analysis section</p>
-</div>
-<p><strong>Prerequisites and dependence:</strong> <code>pyds9plugin</code> runs under Python
-versions <span class="arithmatex">\(&gt;3.5\)</span>. Note that as a minimum, any user will need to have at
-least installed <a href="https://GitHub.com/ericmandel/pyds9">pyds9</a>,
-<a href="https://NumPy.org"><code>NumPy</code></a>, <a href="https://www.scipy.org"><code>scipy</code></a>,
-<a href="https://www.astropy.org"><code>astropy</code></a>,
-<a href="https://docs.Python.org/3/library/argparse.html"><code>argparse</code></a>,
-<a href="https://docs.pyvista.org"><code>pyvista</code></a>, <a href="https://tqdm.GitHub.io"><code>tqdm</code></a>,
-<a href="https://docs.Python.org/fr/3/library/datetime.html"><code>datetime</code></a>,
-<a href="https://pandas.pydata.org"><code>pandas</code></a>,
-<a href="https://pypi.org/project/PyQt5/"><code>PyQt5</code></a>,
-<a href="https://matplotlib.org"><code>matplotlib</code></a> and
-<a href="https://GitHub.com/glentner/dataphile"><code>dataphile</code></a>.</p>
-<p>For full functionality the
-<a href="https://astromatic.net/software/">astromatic</a> suite (<code>Swarp</code>, <code>Stiff</code> and <code>PSFex</code>) is also needed.</p>
 <h2 id="tutorials">Tutorials</h2>
 <p>The plugin incorporates four tutorials to help the user understand how
 it works and guide him step by step throughout all the functions via
@@ -174,20 +144,18 @@ specific test cases. They are accessible via <code>DS9</code> menus.</p>
 <p><code>Analysis -&gt; Quick look plugin -&gt; Give it a go</code>.</p>
 <p>The help is also available directly from the</p>
 <p><code>Analysis -&gt; Quick look plugin -&gt; Help</code></p>
-<p>Some training videos are available on the
-<a href="https://people.lam.fr/picouet.vincent/pyds9plugin/">website</a> and on
-<a href="https://www.youtube.com/watch?v=XcDm2JQDMLY">youtube</a>.</p>
-<h2 id="performance-and-maintainability">Performance and maintainability</h2>
-<p>Each function has been profiled and optimized in order to increase its
+<!-- Some training videos are available on the
+[website](https://people.lam.fr/picouet.vincent/pyds9plugin/) and on
+[youtube](https://www.youtube.com/watch?v=XcDm2JQDMLY). -->
+
+<!-- Performance and maintainability
+-------------------------------
+
+Each function has been profiled and optimized in order to increase its
 speed performance. For instance, all the dependencies of each function
 are imported within the function so that running DS9Utils only loads
-needed modules. The code follows PEP 8 guide style.</p>
-<h3 id="limitations">Limitations</h3>
-<p><code>Pyds9</code> package is not available on windows.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p><code>Pyds9</code> package is not available on windows.</p>
-</div>
+needed modules. The code follows PEP 8 guide style. -->
+
 <!--
 ### Known issues
 
