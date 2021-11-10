@@ -5,4 +5,29 @@
          <lastmod>2021-11-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
+    <url>
+         <loc>https://vpicouet.github.io/pyds9plugin-doc/concept/</loc>
+         <lastmod>2021-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://vpicouet.github.io/pyds9plugin-doc/feature/</loc>
+         <lastmod>2021-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://vpicouet.github.io/pyds9plugin-doc/license/</loc>
+         <lastmod>2021-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://vpicouet.github.io/pyds9plugin-doc/philosophy/</loc>
+         <lastmod>2021-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://vpicouet.github.io/pyds9plugin-doc/user/</loc>
+         <lastmod>2021-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
 </urlset>

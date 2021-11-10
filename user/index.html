@@ -4,26 +4,26 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="None">
         
-        <link rel="canonical" href="https://vpicouet.github.io/pyds9plugin-doc/">
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <title>pyds9plugin doc</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/base.css" rel="stylesheet">
+        
+        <link rel="canonical" href="https://vpicouet.github.io/pyds9plugin-doc/user/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Tutorials - pyds9plugin doc</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
 
-        <script src="js/jquery-1.10.2.min.js" defer></script>
-        <script src="js/bootstrap.min.js" defer></script>
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
-    <body class="homepage">
+    <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">pyds9plugin doc</a>
+                <a class="navbar-brand" href="..">pyds9plugin doc</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
@@ -33,19 +33,19 @@
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li class="navitem active">
-                                <a href="." class="nav-link">Home</a>
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Guide <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="user/" class="dropdown-item">Tutorials</a>
+    <a href="./" class="dropdown-item active">Tutorials</a>
 </li>
                                     
 <li>
-    <a href="feature/" class="dropdown-item">Important features</a>
+    <a href="../feature/" class="dropdown-item">Important features</a>
 </li>
                                 </ul>
                             </li>
@@ -54,15 +54,15 @@
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="philosophy/" class="dropdown-item">Development philosophy</a>
+    <a href="../philosophy/" class="dropdown-item">Development philosophy</a>
 </li>
                                     
 <li>
-    <a href="concept/" class="dropdown-item">Concept and implementation</a>
+    <a href="../concept/" class="dropdown-item">Concept and implementation</a>
 </li>
                                     
 <li>
-    <a href="license/" class="dropdown-item">License</a>
+    <a href="../license/" class="dropdown-item">License</a>
 </li>
                                 </ul>
                             </li>
@@ -75,12 +75,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" class="nav-link disabled">
+                                <a rel="prev" href=".." class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="user/" class="nav-link">
+                                <a rel="next" href="../feature/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -102,21 +102,17 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#ds9-quick-look-plug-in" class="nav-link">DS9 Quick look Plug-in</a>
+            <li class="nav-item" data-level="1"><a href="#documentation" class="nav-link">Documentation</a>
               <ul class="nav flex-column">
             <li class="nav-item" data-level="2"><a href="#installation" class="nav-link">Installation</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#documentation" class="nav-link">Documentation</a>
+            <li class="nav-item" data-level="2"><a href="#tutorials" class="nav-link">Tutorials</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#contributions" class="nav-link">Contributions</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#features" class="nav-link">Features</a>
+            <li class="nav-item" data-level="2"><a href="#performance-and-maintainability" class="nav-link">Performance and maintainability</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -127,67 +123,76 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<!-- # Welcome to MkDocs
-
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
-
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files. -->
-
-<h1 id="ds9-quick-look-plug-in"><a href="https://people.lam.fr/picouet.vincent/index.html">DS9 Quick look Plug-in</a></h1>
-<p>pyDS9plugin is the first open source pythonic <a href="https://sites.google.com/cfa.harvard.edu/saoimageds9">SAOImageDS9</a> quick look plugin.</p>
-<p>Click on the image to see the 3 minutes youtube presentation video:</p>
-<p><a href="https://www.youtube.com/watch?v=XcDm2JQDMLY"><img alt="Alt Text" src="https://people.lam.fr/picouet.vincent/images/presentation.gif" /></a></p>
-<p>SAOImage DS9 is an astronomical imaging and data visualization application. Its 30 years of development has made it very stable and easy to use. This made it an essential tool in all fields of astronomy (observation, simulation, instrumentation). Much more profitable but pretty unsung feature, its extensibility makes it a limitless tool to interact with astronomical data. This extensibility did not generate a large collaborative and well organized effort to develop important extensions that could progressively converge towards a stable/rapid/configurable multi-extension DS9 package.</p>
-<p>Because I am convince of its interest, this extension is a very naive attempt to try initiate this tendency and explore the different possibilities.</p>
-<p>The goal is the pyds9plugin is then three-fold:
--   Boosting the way we interact with scientific images in a quantitative way to earn important time
--   Try to bring the visualization software DS9 a step further by combining it to image processing tools
--   Create a code collaboration catalyst by providing a first extensive package gathering a glimpse of all the possibilities that offers DS9 extensibility</p>
-<hr />
-<!-- Animated GIF of AutoGUI -->
-
+<h1 id="documentation">Documentation</h1>
 <h2 id="installation">Installation</h2>
-<p>To install pyds9plugin for general purposes use Pip:</p>
-<pre><code>pip install pyds9plugin
-</code></pre>
-<p>Finish the installation and see the different functions by running:</p>
-<pre><code>DS9Utils
-</code></pre>
-<p>Finally, load the analysis file in DS9 by running:</p>
-<pre><code>DS9Utils LoadDS9QuickLookPlugin
-</code></pre>
-<p>And launch DS9!
-If you are using Anaconda, install using the above call to pip <em>from inside your environment</em>.
-There is not as of yet a separate conda package.</p>
-<h2 id="documentation">Documentation</h2>
-<p>The documentation of the extension is available <a href="https://nuage.osupytheas.fr/s/TW4dZsf5XzJcQFC">here</a>.</p>
-<h2 id="contributions">Contributions</h2>
-<p>Contributions are welcome in the form of  suggestions for additional features,  pull requests with
-new features or  bug fixes, etc. If you find  bugs or have questions, open an  <em>Issue</em> here. If and
-when the project grows, a  code of conduct will be provided along side  a more comprehensive set of
-guidelines for contributing; until then, just be nice.</p>
-<h2 id="features">Features</h2>
-<ul>
-<li>Command line access: The package is totally accessible via command line. Run <code>DS9Utils</code> to see all the available function and <code>DS9Utils function -h</code> to see the help of each function. All the arguments of the functions are parsed through argparse module which makes the functions not only accessible from DS9, but from terminal and python using argv argument.</li>
-<li>Multi-processing: PyDS9plugin is by essence a quicklook plug-in that is perfect to analyze and process images on the fly by changing parameters and so on. But it was important for us to make it suitable for more important pipelines as soon as you are ok with the parameters to use. To this end, most of the functions are compatible with multi-processing so that they can be run on a set of images.</li>
-<li>Multi-operability: Command line access and python import allows to operate the plugin for other pipelines. The plugin for DS9 could actually pretty easily be operated by other visualization softwares like ginga or glueviz.</li>
-<li>Python interpreter/macros</li>
-<li>VTK 3D rendering</li>
-<li>Interactive profile fitting</li>
-</ul>
-<p><img alt="caption" src="fig/ds9page.jpg" /></p></div>
+<p><code>pyds9plugin</code> is governed by the CeCILL-B license under French law and
+abides by the rules of free software distribution. The package has been
+released on <a href="https://pypi.org/project/pyds9plugin/">https://pypi.org</a>
+and is being reviewed to become an <a href="https://www.astropy.org/affiliated/">astropy affiliated
+packages</a>. The source code is
+available on GitHub:\
+<code>git clone https://GitHub.com/vpicouet/DS9functions.git</code></p>
+<p>People can contribute to the code via GitHub and fill issues with
+Github's issue tracker. <code>pyds9plugin</code> works with <code>DS9</code> with a version
+equal to or higher than 8.2. The extension can be installed via the
+terminal:\
+<code>pip install -v pyds9plugin</code>\
+or\
+<code>Python setup.py install</code></p>
+<p>The package can also be installed inside a <a href="https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">virtual
+environment</a>.
+The package will be accessible via <code>DS9Utils</code> keyword in the terminal.
+To load the analysis file in <code>DS9</code> run:\
+<code>DS9Utils LoadDS9QuickLookPlugin</code>\
+If the file can not be added automatically, instructions will appear to
+add it manually.</p>
+<p><strong>Prerequisites and dependence:</strong> <code>pyds9plugin</code> runs under Python
+versions $&gt;3.5$. Note that as a minimum, any user will need to have at
+least installed <a href="https://GitHub.com/ericmandel/pyds9">pyds9</a>,
+<a href="https://NumPy.org"><code>NumPy</code></a>, <a href="https://www.scipy.org"><code>scipy</code></a>,
+<a href="https://www.astropy.org"><code>astropy</code></a>,
+<a href="https://docs.Python.org/3/library/argparse.html"><code>argparse</code></a>,
+<a href="https://docs.pyvista.org"><code>pyvista</code></a>, <a href="https://tqdm.GitHub.io"><code>tqdm</code></a>,
+<a href="https://docs.Python.org/fr/3/library/datetime.html"><code>datetime</code></a>,
+<a href="https://pandas.pydata.org"><code>pandas</code></a>,
+<a href="https://pypi.org/project/PyQt5/"><code>PyQt5</code></a>,
+<a href="https://matplotlib.org"><code>matplotlib</code></a> and
+<a href="https://GitHub.com/glentner/dataphile"><code>dataphile</code></a>.</p>
+<p>For full functionality the
+<a href="https://astromatic.net/software/">astromatic</a> suite (<code>SExtractor</code>,
+<code>Swarp</code>, <code>Stiff</code> and <code>PSFex</code>) is also needed.</p>
+<h2 id="tutorials">Tutorials</h2>
+<p>The plugin incorporates four tutorials to help the user understand how
+it works and guide him step by step throughout all the functions via
+specific test cases. They are accessible via <code>DS9</code> menus.</p>
+<p><code>Analysis -&gt; Quick look plugin -&gt; Give it a go</code>.</p>
+<p>The help is also available directly from the</p>
+<p><code>Analysis -&gt; Quick look plugin -&gt; Help</code></p>
+<p>Some training videos are available on the
+<a href="https://people.lam.fr/picouet.vincent/pyds9plugin/">website</a> and on
+<a href="https://www.youtube.com/watch?v=XcDm2JQDMLY">youtube</a>.</p>
+<h2 id="performance-and-maintainability">Performance and maintainability</h2>
+<p>Each function has been profiled and optimized in order to increase its
+speed performance. For instance, all the dependencies of each function
+are imported within the function so that running DS9Utils only loads
+needed modules. The code follows PEP 8 guide style.</p>
+<h3 id="limitations">Limitations</h3>
+<p><code>Pyds9</code> package is not available on windows.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>Pyds9</code> package is not available on windows.</p>
+</div>
+<h3 id="known-issues">Known issues</h3>
+<p>No Next window in tutorials:</p>
+<p>:   This means that there was an error at the install of PyQt5. On
+    Linux, refer to that
+    <a href="https://www.programmersought.com/article/30566120835/">page</a> to
+    solve the issue. On mac you can uninstall pyds9plugin, re-install
+    the required packages using
+    <a href="https://GitHub.com/mamba-org/mamba">mamba</a>:\
+    <code>mamba install NumPy matplotlib astropy tqdm pyvista  PyQt</code>\
+    and then re-install pyds9plugin:\
+    <code>pip install -v pyds9plugin</code>\</p></div>
             </div>
         </div>
 
@@ -196,11 +201,11 @@ guidelines for contributing; until then, just be nice.</p>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
         <script>
-            var base_url = ".",
+            var base_url = "..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="js/base.js" defer></script>
-        <script src="search/main.js" defer></script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -265,8 +270,3 @@ guidelines for contributing; until then, just be nice.</p>
 
     </body>
 </html>
-
-<!--
-MkDocs version : 1.2.3
-Build Date UTC : 2021-11-10 13:00:34.408363+00:00
--->
