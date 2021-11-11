@@ -52,6 +52,10 @@
     <a href="../feature/" class="dropdown-item">Important features</a>
 </li>
                                     
+<li>
+    <a href="../function/" class="dropdown-item">All the functions</a>
+</li>
+                                    
   <li class="dropdown-submenu">
     <a href="#" class="dropdown-item">Videos</a>
     <ul class="dropdown-menu">
@@ -185,7 +189,8 @@ parameter window is shown in next Figure.</p>
 followed by the function to be called and its arguments. <code>pyds9plugin</code>
 will then communicate, control, and exchange data with <code>DS9</code> GUI via
 <code>pyds9</code> package. The way the extension operates is illustrated in next.</p>
-<p><img alt="caption" src="../fig/work.jpg" /></p>
+<p><img alt="caption" src="../fig/work.jpg" />
+<em>Diagram representing the way the plugin is loaded within <code>DS9</code> and called. <code>pyds9plugin</code> can be called from the terminal (through command lines) which bypasses the need for <code>DS9</code> GUI.</em></p>
 <h2 id="communication">Communication</h2>
 <p>Within the <code>DS9</code> program, the <code>XPA</code> (X Public Access) messaging system
 has been designed to provide seamless communication between <code>DS9</code> GUI
@@ -199,7 +204,8 @@ display <code>NumPy</code> arrays and catalogs, change parameters, create region
 <code>DS9</code> plots, etc.). One interest in using Python is to use the full
 capability of its famous packages such as <code>matplotlib</code>, which offers
 other possibilities than the <code>DS9</code> native plotting GUI.</p>
-<p><img alt="caption" src="../fig/params.jpg" /></p>
+<p><img alt="caption" src="../fig/params.jpg" />
+<em><code>SExtractor</code> parameters window allows to show the different parameter possibilities offered by <code>DS9</code>.  In addition to different menu types (entry, menu, and checkboxes, file system browser), the addition of tabs allows navigating through an important number of organized parameters.</em></p>
 <h2 id="running-a-function">Running a function</h2>
 <p>All the functions are directly accessible from <code>DS9</code> GUI (within the
 analysis menu). Accessing a function will make appear a parameter window
@@ -210,8 +216,10 @@ provides an expeditive alternative that allows retrieving commands
 extremely fast.</p>
 <p>Some fundamental functions are available through shortcuts to gain time.
 The shortcuts are noted between parenthesis next to the function's name. The functions having a shortcut are: Open (o), lock (l), radial profile (r).</p>
-<p><img alt="caption" src="../fig/commands.jpg" /></p>
-<p><img alt="caption" src="../fig/command_finder.jpg" /></p>
+<p><img alt="caption" src="../fig/commands.jpg" />
+<em><code>pyds9plugin</code>'s functions divided in the three sub-extensions: generic functions, instrumentation and astronomical software. The terminal icon emphasize functions that do not require <code>DS9</code> to be launched, which can be interesting for generalizing the processing on a server. Most of these functions (highlighted with the wheel icon) are compatible with multi-image and multi-threaded analysis. Functions with enhanced interactivity based on pickable meta-data for instance are marked with the  interactivity icon.</em>
+<img alt="caption" src="../fig/command_finder.jpg" />
+<em>Functions are divided into three main menus: Generic functions, Instrumentation-AIT, and Astronomical software, and can be easily accessible via the command finder in the analysis menu bar</em></p>
 <h2 id="logging-and-verbosity">Logging and verbosity</h2>
 <p>The functions are silent when launched from <code>DS9</code> and will only return
 nominal outputs (images, regions, messages). If the code encounters an

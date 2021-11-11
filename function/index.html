@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://vpicouet.github.io/pyds9plugin-doc/function/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>All the functions - pyds9plugin doc</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">pyds9plugin doc</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Guide <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../install/" class="dropdown-item">Installation</a>
+</li>
+                                    
+<li>
+    <a href="../user/" class="dropdown-item">Tutorials</a>
+</li>
+                                    
+<li>
+    <a href="../feature/" class="dropdown-item">Important features</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">All the functions</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Videos</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../videos_multi/" class="dropdown-item">Multi-image processing</a>
+</li>
+            
+<li>
+    <a href="../videos_instru/" class="dropdown-item">Instrumentation</a>
+</li>
+            
+<li>
+    <a href="../videos_soft/" class="dropdown-item">Software</a>
+</li>
+            
+<li>
+    <a href="../videos_generic/" class="dropdown-item">Generic</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../philosophy/" class="dropdown-item">Development philosophy</a>
+</li>
+                                    
+<li>
+    <a href="../concept/" class="dropdown-item">Concept and implementation</a>
+</li>
+                                    
+<li>
+    <a href="../license/" class="dropdown-item">License</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../feature/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../videos_multi/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#the-different-functions" class="nav-link">The different functions</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#generic-functions" class="nav-link">Generic functions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#instrumentation" class="nav-link">Instrumentation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#astronomical-software" class="nav-link">Astronomical software</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="the-different-functions">The different functions</h1>
+<p>The functions are divided into three categories to help the organization:
+Generic functions, instrumentation-related functions, and
+astronomical-software-related functions. To make more accessible the
+understanding of each function, they are possibly prefixed by three
+badges:</p>
+<ul>
+<li>
+<p><strong>Boosting interaction:</strong> These functions are considered to improve the
+interactivity between the user and the visualized data. This interaction
+can be based on user-defined regions, interactive fitting, generation of
+pickable metadata, etc.</p>
+</li>
+<li>
+<p><strong>DS9 not required:</strong> The function is totally accessible via Terminal
+independently from <code>DS9</code>, which means that the function does not need
+<code>DS9</code> to be installed/open for being called. This can be interesting for
+server users.</p>
+</li>
+<li>
+<p><strong>Multi-image processing:</strong> The function, accessible via <code>Shell</code>
+command, can be run on several images, and each analysis will run on a
+different thread</p>
+</li>
+</ul>
+<p><img alt="caption" src="../fig/commands.jpg" />
+<em>pyds9plugin's functions divided in the three sub-extensions: generic functions, instrumentation and astronomical software. The terminal icon emphasize functions that do not require DS9 to be launched, which can be interesting for generalizing the processing on a server.
+Most of these functions (highlighted with the wheel icon) are compatible with multi-image and multi-threaded analysis.
+Functions with enhanced interactivity based on pickable meta-data for instance are marked with the  interactivity icon.</em></p>
+<h2 id="generic-functions">Generic functions</h2>
+<p>This series of very general functions aims at filling some gaps of <code>DS9</code>
+with stable generic functions (fitting, region-based functions), gaining
+some time with key functions: (change display settings/lock parameters),
+etc.</p>
+<ul>
+<li>
+<p><strong>Change Display Parameters</strong> This basic function applies specific
+    thresholding, scale, and colormap to the <code>DS9</code>-loaded image to give
+    a quick and general visualization of the image. Accessible via one
+    key hit (S), this allows exploring the full depth of the image
+    quickly. More interestingly, the user can focus on a specific region
+    of the image by creating and selecting a box or a circle on the
+    region of interest.</p>
+</li>
+<li>
+<p><strong>Lock / Unlock Frames</strong> Access all the locking parameters of <code>DS9</code>
+    frames at once to gain time: frame, crosshair, smooth, scale-limits,
+    colorbar.</p>
+</li>
+<li>
+<p><strong>Create Header DataBase</strong> Creates a catalog combining all meta-data
+    information.</p>
+</li>
+<li>
+<p><strong>Filtering &amp; organizing images</strong> Uses fits file database to create
+    and order nicely filtered fits files</p>
+</li>
+<li>
+<p><strong>Macro / Python Command</strong> Interprets a Python command or file and
+    applies it to given image(s)</p>
+</li>
+<li>
+<p><strong>Interactive 1D Fitting On Plot</strong> Fit interactively any <code>DS9</code> plot
+    or catalog by different pre-defined functions</p>
+</li>
+<li>
+<p><strong>Fit Gaussian 2D</strong> Performs 2D Gaussian fitting on the encircled
+    region in DS9. Opens up a VTK 3D plot of the encircled data. Any
+    other feature can be fitted by selecting it (r). Each fit creates a
+    region on the <code>DS9</code> GUI with the fit parameters of
+    <code>astropy.modeling.functional_models.Gaussian2D</code>.</p>
+</li>
+<li>
+<p><strong>Trimming</strong> Cropping/Trimming function that keeps WCS header
+    information.</p>
+</li>
+<li>
+<p><strong>Open file(s)</strong> in <code>DS9</code> in an easier way. Possibility to enter the
+    path of an image and a regular expression to open multiple files.
+    Files can be open in the following format: Slice,
+    Multi-frame-as-cube, multi-frame, RGB, Cube, PRISM.</p>
+</li>
+<li>
+<p><strong>Plot Region In 3D</strong></p>
+</li>
+<li>
+<p><strong>Convert image</strong> Convert file into another type. The different
+    types are (int8, int16, int32, int64, float32, float64) with the
+    possibiity to rescale pixels value.</p>
+<p><!-- <img alt="caption" src="./fig/logo.png" /> -->
+<img alt="caption" src="../fig/python.jpg" /></p>
+</li>
+</ul>
+<h2 id="instrumentation">Instrumentation</h2>
+<p>This series of functions aims to assist instrument researchers during
+assembly and testing with through-focus, light curves, centering,
+radial, energy profile analysis, etc. More complex but general
+processing functions (for detector characterization, for instance) can
+be found in the macros like auto-correlation, fast Fourier
+transform, smoothing, masking, interpolation, noise measurements, etc.</p>
+<ul>
+<li>
+<p><strong>Centering (C)</strong> Centers <code>DS9</code> region encircling a spot. Five
+    centroid methods are available: maximum, <span class="arithmatex">\(2\times1\)</span>1D fittin, 2D
+    fitting, barycenter).</p>
+</li>
+<li>
+<p><strong>Radial profile</strong> Compute and plot azimuthally averaged radial
+    profile and energy profile of the encircled source in <code>DS9</code> after
+    performing a re-centering. For extended sources, the source size can
+    be informed to deconvolve the radial profile from the source.</p>
+</li>
+<li>
+<p><strong>Throughfocus analysis</strong> Perform a through-focus analysis on a
+    series of images and return different focus estimates as well as the
+    3D evolution of the PSF.</p>
+</li>
+<li>
+<p><strong>Explore PSFs/vignettes</strong> Explore PSFs/vignettes based on
+    <code>SExtractor</code> catalog to visualize how it evolves in the field or
+    with FWHM, magnitude, excentricity, angle or amplitude.</p>
+</li>
+<li>
+<p><strong>Light curve</strong> Perform a light-curve analysis and returns the
+    centered image.</p>
+</li>
+<li>
+<p><strong>Extract Sources</strong> Extract sources from images(s) using photutils</p>
+</li>
+<li>
+<p><strong>Subtract Background</strong> Subtract background from images(s) using
+    photutils</p>
+</li>
+<li>
+<p><strong>Aperture photometry</strong> Computes photometry in given aperture(s)</p>
+</li>
+</ul>
+<p><img alt="caption" src="../fig/fit2d.jpg" />
+<img alt="caption" src="../fig/radial.jpg" />
+<em>Radial and energy profile estimation. The function also returns different image quality estimators: FWHM, <span class="arithmatex">\(50\%\)</span> and <span class="arithmatex">\(80\%\)</span> encircled energy, Moffat fit.</em>
+<img alt="caption" src="../fig/throughfocus.jpg" />
+<em>hrough-focus analysis based on a set of calibration images. The function generates a plot with four focus estimates: FWHM, EE<span class="arithmatex">\(_{50\%}\)</span>, EE<span class="arithmatex">\(_{80\%}\)</span>, Max<span class="arithmatex">\(_{\mathrm{pix}}\)</span></em></p>
+<h2 id="astronomical-software">Astronomical software</h2>
+<p>The goal of this series of functions is to link the most essential
+astronomical image processing software like the astromatic suite
+(<code>SExtractor</code>, <code>Stiff</code>, <code>Swarp</code>, <code>PSFex</code> - need to be installed) and
+offer them a parameter GUI.</p>
+<ul>
+<li>
+<p><strong>Astrometric Calibration</strong> Uses <code>astrometry.net</code> to compute
+    position on the sky and return WCS header. If regions are created
+    (by hand or via <code>SExtractor</code>) and the parameter XY-catalog is set,
+    only the position of the sources will be uploaded.</p>
+</li>
+<li>
+<p><strong><code>STIFF</code> - Color Images</strong> Run <code>STIFF</code> astromatic software
+    to convert scientific FITS images to the more popular
+    TIFF format for illustration purposes.</p>
+</li>
+<li>
+<p><strong><code>PSFex</code></strong> Run <code>PSFex</code> astromatic software to extracts models of the Point Spread Function from FITS images processed with <code>SExtractor</code>, and measures the quality of images. The generated PSF models can be used for model-fitting photometry or morphological analyses.</p>
+</li>
+<li>
+<p><strong><code>SExtractor</code></strong> Run <code>SExtraxtor</code> astromatic software
+    to build a catalogue of objects from an astronomical image.</p>
+</li>
+<li>
+<p><strong><code>Swarp</code></strong> Run <code>Swarp</code> software from <code>DS9</code> to
+    resample and co-add together FITS images using any astrometric
+    projection defined in the WCS standard.</p>
+</li>
+<li>
+<p><strong>Resample images</strong> Run part of <code>Swarp</code> astromatic software for
+    resampling without co-addition.</p>
+<p><img alt="caption" src="../fig/sex.jpg" />
+<em><code>SExtractor</code> function output. Here, all the regions can be selected and will show a particular raw of the catalog. Likewise, one or several lines of the catalogs can be selected, and the corresponding region(s) will blink. This can be of huge interest to optimize source extraction settings, to find particular objects in the image, etc.</em></p>
+</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../javascripts/mathjax.js" defer></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
