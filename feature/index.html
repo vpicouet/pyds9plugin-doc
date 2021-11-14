@@ -251,7 +251,7 @@ interpolate masked values in the image, etc.) or a series of processing
 STD_DEV = 1
 while ~np.isfinite(ds9).all():
   kernel = Gaussian2DKernel(x_stddev=STD_DEV, y_stddev=STD_DEV)
-  \texttt{DS9} = interpolate_replace_nans(ds9, kernel)
+  ds9 = interpolate_replace_nans(ds9, kernel)
   STD_DEV += 1
 </code></pre>
 <h2 id="vtk-3d-rendering">VTK 3D rendering</h2>
