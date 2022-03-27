@@ -1,7 +1,3 @@
-
-Concept and implementation
-==========================
-
 A Pythonic package
 ------------------
 
@@ -42,7 +38,7 @@ will then communicate, control, and exchange data with `DS9` GUI via
 `pyds9` package. The way the extension operates is illustrated in next.
 
 ![caption](./fig/work.jpg)
-
+*Diagram representing the way the plugin is loaded within `DS9` and called. `pyds9plugin` can be called from the terminal (through command lines) which bypasses the need for `DS9` GUI.*
 ### Communication
 
 Within the `DS9` program, the `XPA` (X Public Access) messaging system
@@ -62,7 +58,7 @@ other possibilities than the `DS9` native plotting GUI.
 
 
 ![caption](./fig/params.jpg)
-
+*`SExtractor` parameters window allows to show the different parameter possibilities offered by `DS9`.  In addition to different menu types (entry, menu, and checkboxes, file system browser), the addition of tabs allows navigating through an important number of organized parameters.*
 
 ### Running a function
 
@@ -79,13 +75,11 @@ Some fundamental functions are available through shortcuts to gain time.
 The shortcuts are noted between parenthesis next to the function's name. The functions having a shortcut are: Open (o), lock (l), radial profile (r).
 
 ![caption](./fig/commands.jpg)
-
+*`pyds9plugin`'s functions divided in the three sub-extensions: generic functions, instrumentation and astronomical software. The terminal icon emphasize functions that do not require `DS9` to be launched, which can be interesting for generalizing the processing on a server. Most of these functions (highlighted with the wheel icon) are compatible with multi-image and multi-threaded analysis. Functions with enhanced interactivity based on pickable meta-data for instance are marked with the  interactivity icon.*
 ![caption](./fig/command_finder.jpg)
+*Functions are divided into three main menus: Generic functions, Instrumentation-AIT, and Astronomical software, and can be easily accessible via the command finder in the analysis menu bar*
 
-
-
-Logging and verbosity
----------------------
+### Logging and verbosity
 
 The functions are silent when launched from `DS9` and will only return
 nominal outputs (images, regions, messages). If the code encounters an

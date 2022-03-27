@@ -1,7 +1,4 @@
 
-Documentation
-=============
-
 Installation
 ------------
 
@@ -12,7 +9,7 @@ and is being reviewed to become an [astropy affiliated
 packages](https://www.astropy.org/affiliated/). The source code is
 available on GitHub:
 
-` git clone https://GitHub.com/vpicouet/DS9functions.git `
+` git clone git://GitHub.com/vpicouet/pyds9plugin.git `
 
 People can contribute to the code via GitHub and fill issues with
 Github's issue tracker. `pyds9plugin` works with `DS9` with a version
@@ -23,7 +20,7 @@ terminal:
 
 or
 
-` Python setup.py install`
+` python3 setup.py install`
 
 The package can also be installed inside a [virtual
 environment](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
@@ -32,9 +29,8 @@ To load the analysis file in `DS9` run:
 
 ` DS9Utils LoadDS9QuickLookPlugin`
 
-If the file can not be added automatically, instructions will appear to add it manually.
 !!! warning
-    To do so copy the path returned by the previous command and add it to DS9 preference analysis section
+    If the file can not be added automatically, instructions will appear to add it manually. The given path returned by the previous command will just need to be added to DS9 preference analysis section
 
 **Prerequisites and dependence:** `pyds9plugin` runs under Python
 versions $>3.5$. Note that as a minimum, any user will need to have at

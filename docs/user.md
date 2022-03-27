@@ -7,6 +7,15 @@ specific test cases. They are accessible via `DS9` menus.
 
 ` Analysis -> Quick look plugin -> Give it a go`.
 
+The four tutorials are:
+
+- **General purpose**: Change display parameters, plot region in 3D, create header catalog, filtering & organizing images
+- **Photometric analysis**: Centering, Aperture Photometry, SExtractor
+- **Image quality assessment**: Fit Gaussian 2D, Radial and Energy profile, Throughfocus, Lock/Unlock frames
+- **Image processing**: Interactive 1D fitting on plot, Execute Python command
+
+
+
 The help is also available directly from the
 
 ` Analysis -> Quick look plugin -> Help`

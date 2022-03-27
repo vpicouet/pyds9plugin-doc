@@ -1,3 +1,5 @@
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_4WP38UFuco" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 Motivation
 ----------
 
@@ -70,8 +72,10 @@ weaknesses in terms of image visualization and processing. On a total of
 about 127,000 downloads, `Aladin`, `DS9`, `GlueViz`, and `Ginga`
 represent respectively 36%, 28%, 20%, and 8% percent of the
 total downloads.
-![caption](./fig/softs2.jpg)
 
+
+![caption](./fig/softs2.jpg)
+*Main image visualization/processing applications in astronomy.  Native features are marked as V$_n$ while feature added via plugins are marked as  V$_p$. This table is based on a survey sent to fits viewers lead developers. In the survey, we called basic image processing radial profile, light curve, source extraction, etc. and high-level analysis: deconvolution, Fourier transform, etc.*
 
 
 There seems to be some consensus on the interest of plugins to extend

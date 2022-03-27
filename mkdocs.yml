@@ -1,13 +1,15 @@
 site_name: pyds9plugin doc
 site_url: https://vpicouet.github.io/pyds9plugin-doc/
-# theme:
-#   name: readthedocs
+theme:
+  name: readthedocs
 markdown_extensions:
   - footnotes
   - admonition
   - pymdownx.arithmatex:
       generic: true
-
+  - toc:
+      baselevel: 0
+      toc_depth: "1-4"
 extra_javascript:
   - javascripts/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
@@ -19,6 +21,7 @@ nav:
         - 'Installation': 'install.md'
         - 'Tutorials': 'user.md'
         - 'Important features': 'feature.md'
+        - 'All the functions': 'function.md'
         - 'Videos':
             - 'Multi-image processing': 'videos_multi.md'
             - 'Instrumentation': 'videos_instru.md'
