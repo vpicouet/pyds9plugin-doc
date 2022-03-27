@@ -36,7 +36,7 @@ pyDS9plugin is the first open source pythonic [SAOImageDS9](https://sites.google
 
 - Pushing the DS9 visualization application a step further by combining it to image processing tools
 - Boosting the way we interact with scientific images in a quantitative way
-- catalyze community collaboration and code enhancement by providing a first extensive package gathering a glimpse of all the possibilities that offers DS9 extensibility
+- Catalyze community collaboration and code enhancement by providing a first extensive package gathering a glimpse of all the possibilities that offers DS9 extensibility
 
 
 
