@@ -6,6 +6,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://vpicouet.github.io/pyds9plugin-doc/FB_fields/</loc>
+         <lastmod>2022-03-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://vpicouet.github.io/pyds9plugin-doc/concept/</loc>
          <lastmod>2022-03-27</lastmod>
          <changefreq>daily</changefreq>
