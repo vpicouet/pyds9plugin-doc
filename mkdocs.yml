@@ -1,5 +1,6 @@
 site_name: pyds9plugin doc
 site_url: https://vpicouet.github.io/pyds9plugin-doc/
+repo_url: https://github.com/vpicouet/pyds9plugin-doc/
 theme:
   name: readthedocs
 markdown_extensions:
