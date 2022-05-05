@@ -33,20 +33,21 @@
     document.getElementById("temperature"),
     "alltemps.csv",
     {
-    labels: ["time","CuClamp1[C]:","Getter[C]:","CuClamp2[C]:","EMCCDBack[C]:","Reject[C]:", "Coldhead[C]:"],
+    // labels: ["time","CuClamp1[C]:","Getter[C]:","CuClamp2[C]:","EMCCDBack[C]:","Reject[C]:", "Coldhead[C]:"],
+    labels: ["time","CuClamp1[C]:","Getter[C]:","CuClamp2[C]:","EMCCDBack[C]:","Reject[C]:", "Coldhead[C]:","bot-tank-Iks[C]","top-tank-Iks[C]"],
     labelsDiv: document.getElementById("labels"),
     xlabel: 'Time [ PST ]',
     ylabel: 'Temperature [ C ]',
     rollPeriod: 1,
     showRoller: true,
     valueRange: [-140,60],
-    // stackedGraph: isStacked,
+    stackedGraph: false,
+    // strokeWidth: 1,
+    // strokeBorderWidth: 2,
 
     // highlightCircleSize: 2,
     highlightCircleSize: 1,
     strokeWidth: 1,
-    // strokeBorderWidth: isStacked ? null : 1,
-
 
     highlightSeriesOpts: {
       strokeWidth: 1.3,
