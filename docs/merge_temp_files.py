@@ -8,7 +8,9 @@ subprocess.call(["ls", "-l"])
 
 
 
+
 subprocess.call(["rsync", "-avzhr", "--max-size=1.5m", "fireball2@fb-luna.astro.columbia.edu:/home/fireball2/data/",'/Users/Vincent/Nextcloud/LAM/FIREBALL/2022/temperatures'])
+
 
 # rsync -avzhr --max-size=1.5m fireball2@fb-luna.astro.columbia.edu:"/home/fireball2/data/*" /Users/Vincent/Nextcloud/LAM/FIREBALL/2022/temperatures/
 # time.sleep(4)
@@ -44,12 +46,9 @@ tables_press_styack = vstack(tables_press)
 #         pass
 temp_path = '/Users/Vincent/Nextcloud/LAM/FIREBALL/2022/temperatures/all/alltemps.csv'
 press_path = '/Users/Vincent/Nextcloud/LAM/FIREBALL/2022/temperatures/all/pressure.csv'
-tables_styack.write(temp_path,overwrite=True,fill_values=[(ascii.masked, "NaN")])
-tables_press_styack.write(press_path, overwrite=True, fill_values=[(np.nan, "null")])
+tables_styack.write(temp_path,overwrite=True,fill_values=[(ascii.masked, "")])
+tables_press_styack.write(press_path, overwrite=True, fill_values=[(np.nan, "")])
 
 import shutil
 shutil.copy(press_path, "/Users/Vincent/Github/pyds9plugin-doc/docs/temperatures/pressure.csv")
 shutil.copy(temp_path, "/Users/Vincent/Github/pyds9plugin-doc/docs/temperatures/alltemps.csv")
-
-
-#%%
