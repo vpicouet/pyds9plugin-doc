@@ -10,9 +10,13 @@ packages](https://www.astropy.org/affiliated/). The source code is
 available on GitHub:
 
 ` git clone https://github.com/vpicouet/pyds9plugin.git `
+
 You should create an environment with python 3.8:
+
 ` conda create --name py38 python=3.8  `
+
 and then activate it
+
 ` conda activate py38 `
 
 People can contribute to the code via GitHub and fill issues with
