@@ -24,9 +24,9 @@ Github's issue tracker. `pyds9plugin` works with `DS9` with a version
 equal to or higher than 8.2. The extension can be installed via the
 terminal:
 
-`git clone https://github.com/vpicouet/pyds9plugin.git
-cd pyds9plugin
-pip install -e . `
+`git clone https://github.com/vpicouet/pyds9plugin.git`
+`cd pyds9plugin`
+`pip install -e . `
 
 
 The package can also be installed inside a [virtual
