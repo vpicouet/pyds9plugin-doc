@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoomable Sunburst</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #fafafa;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            text-align: center;
+        }
+        #charts-container {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .chart-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .chart-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+        .chart {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        .tooltip {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 4px;
+            padding: 10px 14px;
+            font-size: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            max-width: 300px;
+            z-index: 1000;
+        }
+        .tooltip.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hierarchical Distribution <span style="font-size: 14px; color: #7f8c8d;">(Click to zoom)</span></h1>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <label style="font-size: 14px; color: #34495e;">
+            <input type="checkbox" id="show-values" checked> Show values on chart
+        </label>
+    </div>
+    <div id="charts-container"></div>
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+    const CONFIG = {
+        googleSheetUrl: 'https://docs.google.com/spreadsheets/d/15u-d4Ra5tOuHu4U7vf7_cPGw9DNRAAe8ckBcxM_9zZQ/export?format=csv&gid=846751885',
+        csvFile: 'mass_power_simple.csv',
+        useGoogleSheet: true
+    };
+
+    function loadData() {
+        const dataUrl = CONFIG.useGoogleSheet ? CONFIG.googleSheetUrl : CONFIG.csvFile;
+
+        d3.csv(dataUrl).then(function(data) {
+            const columns = Object.keys(data[0]);
+            const hierarchyColumns = columns.filter(col => /^S\d+$/.test(col)).sort();
+            const descriptionColumn = columns.find(col => col.toLowerCase() === 'description');
+            const metricColumns = columns.filter(col =>
+                !col.match(/^S\d+$/) && col.toLowerCase() !== 'description'
+            );
+
+            console.log('📊 Structure:', hierarchyColumns, metricColumns, descriptionColumn);
+
+            data.forEach(d => {
+                metricColumns.forEach(col => {
+                    d[col] = +d[col] || 0;
+                });
+            });
+
+            const container = d3.select('#charts-container');
+            container.html('');
+
+            metricColumns.forEach(metric => {
+                const wrapper = container.append('div').attr('class', 'chart-wrapper');
+                wrapper.append('div').attr('class', 'chart-title').text(metric);
+                const chartDiv = wrapper.append('div').attr('class', 'chart');
+
+                const hierarchyData = createHierarchy(data, hierarchyColumns, metricColumns);
+                const chart = createChart(hierarchyData, metric, descriptionColumn, metricColumns);
+                chartDiv.node().appendChild(chart);
+            });
+        }).catch(function(error) {
+            console.error('Erreur:', error);
+            alert('Erreur lors du chargement des données.');
+        });
+    }
+
+    function createHierarchy(data, hierarchyColumns, metricColumns) {
+        const hierarchy = { name: 'root', children: [] };
+        const maxLevel = hierarchyColumns.length;
+        const currentNodes = new Array(maxLevel).fill(null);
+
+        data.forEach(row => {
+            const levels = hierarchyColumns.map(col => (row[col] || '').trim());
+            let lastNonEmptyLevel = -1;
+            for (let i = 0; i < levels.length; i++) {
+                if (levels[i]) lastNonEmptyLevel = i;
+            }
+            if (lastNonEmptyLevel === -1) return;
+
+            const rowData = {};
+            Object.keys(row).forEach(key => {
+                if (!key.match(/^S\d+$/)) {
+                    rowData[key] = row[key];
+                }
+            });
+
+            console.log('Row data:', row, 'Extracted:', rowData); // DEBUG
+
+            const hasMetrics = metricColumns.some(col => (+row[col] || 0) !== 0);
+            let parent = hierarchy;
+
+            for (let level = 0; level <= lastNonEmptyLevel; level++) {
+                const name = levels[level];
+                if (!name) continue;
+
+                const isLeaf = (level === lastNonEmptyLevel) && hasMetrics;
+
+                if (level > 0) parent = currentNodes[level - 1];
+                if (!parent) continue;
+
+                if (isLeaf) {
+                    if (!parent.children) parent.children = [];
+                    parent.children.push({ name: name, ...rowData });
+                } else {
+                    if (!parent.children) parent.children = [];
+                    // Copier aussi les données pour les nœuds intermédiaires
+                    const node = { name: name, children: [], ...rowData };
+                    parent.children.push(node);
+                    currentNodes[level] = node;
+                    for (let i = level + 1; i < maxLevel; i++) currentNodes[i] = null;
+                }
+            }
+        });
+
+        return hierarchy;
+    }
+
+    // CODE EXACT DE L'EXEMPLE OFFICIEL D3
+    function createChart(data, metric, descriptionColumn, allMetrics) {
+        const width = 700;
+        const height = width;
+
+        const color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data.children.length + 1));
+
+        // Calculer la profondeur max de la hiérarchie
+        const hierarchy = d3.hierarchy(data)
+            .sum(d => d[metric] || 0)
+            .sort((a, b) => b.value - a.value);
+
+        // Adapter le radius : le rayon total sera (hierarchy.height + 1) * radius
+        // Pour que ça rentre dans width/2, on calcule : radius = (width/2) / (hierarchy.height + 1)
+        const radius = (width / 2) / (hierarchy.height + 1);
+
+        const root = d3.partition()
+            .size([2 * Math.PI, hierarchy.height + 1])(hierarchy);
+
+        root.each(d => d.current = d);
+
+        const arc = d3.arc()
+            .startAngle(d => d.x0)
+            .endAngle(d => d.x1)
+            .padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.005))
+            .padRadius(radius * 1.5)
+            .innerRadius(d => d.y0 * radius)
+            .outerRadius(d => Math.max(d.y0 * radius, d.y1 * radius - 1));
+
+        const svg = d3.create("svg")
+            .attr("viewBox", [-width / 2, -height / 2, width, width])
+            .style("font", "10px sans-serif")
+            .style("width", "100%")
+            .style("height", "auto");
+
+        const path = svg.append("g")
+            .selectAll("path")
+            .data(root.descendants().slice(1))
+            .join("path")
+            .attr("fill", d => {
+                while (d.depth > 1) d = d.parent;
+                return color(d.data.name);
+            })
+            .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.6 : 0.4) : 0)
+            .attr("pointer-events", d => arcVisible(d.current) ? "auto" : "none")
+            .attr("d", d => arc(d.current));
+
+        // Tooltip HTML
+        const tooltip = d3.select("#tooltip");
+        const format = d3.format(",d");
+
+        path.filter(d => d.children)
+            .style("cursor", "pointer")
+            .on("click", clicked);
+
+        // Ajouter les tooltips sur tous les arcs
+        path.on("mouseenter", function(event, d) {
+                console.log('Tooltip hover:', d.data); // DEBUG
+
+                let content = `<strong>${d.data.name}</strong><br>`;
+                content += `${metric}: ${format(d.value)}<br>`;
+                const percentage = ((d.value / root.value) * 100).toFixed(1);
+                content += `Percentage: ${percentage}%`;
+
+                // Afficher la description si elle existe
+                if (descriptionColumn && d.data[descriptionColumn]) {
+                    console.log('Description found:', d.data[descriptionColumn]); // DEBUG
+                    content += `<br><br><em>Description:</em> ${d.data[descriptionColumn]}`;
+                } else {
+                    console.log('No description. Column:', descriptionColumn, 'Value:', d.data[descriptionColumn]); // DEBUG
+                }
+
+                // Pour les feuilles, afficher toutes les autres métriques (sauf celle déjà affichée)
+                if (!d.children && allMetrics) {
+                    const otherMetrics = allMetrics.filter(m => m !== metric);
+                    if (otherMetrics.length > 0) {
+                        content += '<br><br>';
+                        otherMetrics.forEach(m => {
+                            const val = d.data[m];
+                            if (val !== undefined && val !== 0) {
+                                content += `${m}: ${val}<br>`;
+                            }
+                        });
+                    }
+                }
+
+                tooltip.html(content)
+                    .classed("visible", true)
+                    .style("left", (event.pageX + 15) + "px")
+                    .style("top", (event.pageY - 20) + "px");
+            })
+            .on("mousemove", function(event) {
+                tooltip.style("left", (event.pageX + 15) + "px")
+                    .style("top", (event.pageY - 20) + "px");
+            })
+            .on("mouseleave", function() {
+                tooltip.classed("visible", false);
+            });
+
+        function createLabelContent(textElement, d) {
+            const text = d3.select(textElement);
+            text.selectAll("tspan").remove();
+
+            const showValues = document.getElementById("show-values").checked;
+
+            // Détecter les retours à la ligne dans le nom
+            const nameLines = d.data.name.split('\n').filter(line => line.trim());
+
+            // Si une seule ligne et pas de valeur, utiliser le texte simple
+            if (nameLines.length === 1 && !showValues) {
+                text.text(nameLines[0]);
+                return;
+            }
+
+            text.text(''); // Vider le texte simple
+
+            // Calculer le décalage pour centrer
+            const totalLines = showValues ? nameLines.length + 1 : nameLines.length;
+            const startDy = -(totalLines - 1) * 0.6;
+
+            // Afficher chaque ligne du nom
+            nameLines.forEach((line, i) => {
+                text.append("tspan")
+                    .attr("x", 0)
+                    .attr("dy", i === 0 ? `${startDy}em` : "1.2em")
+                    .text(line);
+            });
+
+            // Valeur si checkbox coché
+            if (showValues) {
+                text.append("tspan")
+                    .attr("x", 0)
+                    .attr("dy", "1.2em")
+                    .style("font-size", "9px")
+                    .style("opacity", "0.8")
+                    .text(format(d.value));
+            }
+        }
+
+        const label = svg.append("g")
+            .attr("pointer-events", "none")
+            .attr("text-anchor", "middle")
+            .style("user-select", "none")
+            .selectAll("text")
+            .data(root.descendants().slice(1))
+            .join("text")
+            .attr("fill-opacity", d => +labelVisible(d.current))
+            .attr("transform", d => labelTransform(d.current))
+            .attr("fill", "white")
+            .style("font-size", "10px")
+            .each(function(d) {
+                createLabelContent(this, d);
+            });
+
+        const parent = svg.append("circle")
+            .datum(root)
+            .attr("r", radius)
+            .attr("fill", "none")
+            .attr("pointer-events", "all")
+            .on("click", clicked);
+
+        function clicked(event, p) {
+            parent.datum(p.parent || root);
+
+            root.each(d => d.target = {
+                x0: Math.max(0, Math.min(1, (d.x0 - p.x0) / (p.x1 - p.x0))) * 2 * Math.PI,
+                x1: Math.max(0, Math.min(1, (d.x1 - p.x0) / (p.x1 - p.x0))) * 2 * Math.PI,
+                y0: Math.max(0, d.y0 - p.depth),
+                y1: Math.max(0, d.y1 - p.depth)
+            });
+
+            const t = svg.transition().duration(750);
+
+            path.transition(t)
+                .tween("data", d => {
+                    const i = d3.interpolate(d.current, d.target);
+                    return t => d.current = i(t);
+                })
+                .filter(function(d) {
+                    return +this.getAttribute("fill-opacity") || arcVisible(d.target);
+                })
+                .attr("fill-opacity", d => arcVisible(d.target) ? (d.children ? 0.6 : 0.4) : 0)
+                .attr("pointer-events", d => arcVisible(d.target) ? "auto" : "none")
+                .attrTween("d", d => () => arc(d.current));
+
+            label.filter(function(d) {
+                return +this.getAttribute("fill-opacity") || labelVisible(d.target);
+            }).transition(t)
+                .attr("fill-opacity", d => +labelVisible(d.target))
+                .attrTween("transform", d => () => labelTransform(d.current))
+                .on("end", function(d) {
+                    // Recréer le contenu des labels après la transition
+                    createLabelContent(this, d);
+                });
+        }
+
+        function arcVisible(d) {
+            // Montrer TOUS les niveaux visibles
+            return d.x1 > d.x0;
+        }
+
+        function labelVisible(d) {
+            // Vérification plus stricte de la taille
+            const showValues = document.getElementById("show-values").checked;
+            const threshold = showValues ? 0.12 : 0.06; // facteur 4 avec valeurs, facteur 2 sans
+            return (d.y1 - d.y0) * (d.x1 - d.x0) > threshold;
+        }
+
+        function labelTransform(d) {
+            const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
+            const y = (d.y0 + d.y1) / 2 * radius;
+            return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
+        }
+
+        return svg.node();
+    }
+
+    loadData();
+
+    // Redessiner quand on change le checkbox
+    document.getElementById("show-values").addEventListener("change", function() {
+        loadData();
+    });
+    </script>
+</body>
+</html>
