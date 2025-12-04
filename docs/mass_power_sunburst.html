@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mass & Power Distribution - Sunburst</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background-color: #fafafa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        #charts-container {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .chart-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .chart-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+
+        .chart {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .arc {
+            cursor: pointer;
+            stroke: #fff;
+            stroke-width: 1.5;
+        }
+
+        .arc:hover {
+            opacity: 0.8;
+        }
+
+        .arc-label {
+            pointer-events: none;
+            fill: #fff;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 4px;
+            padding: 10px 14px;
+            font-size: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            max-width: 300px;
+            z-index: 1000;
+        }
+
+        .tooltip.visible {
+            opacity: 1;
+        }
+
+        .tooltip-title {
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+
+        .tooltip-content {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .center-text {
+            position: absolute;
+            text-align: center;
+            pointer-events: none;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .center-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .center-label {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 5px;
+            max-width: 200px;
+            word-wrap: break-word;
+        }
+
+        .legend {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            max-width: 900px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Instrument Mass & Power Distribution</h1>
+
+    <div id="charts-container">
+        <div class="chart-wrapper">
+            <div class="chart-title">Mass Distribution (kg)</div>
+            <div style="position: relative;">
+                <div id="chart-mass" class="chart"></div>
+                <div id="center-text-mass" class="center-text"></div>
+            </div>
+        </div>
+
+        <div class="chart-wrapper">
+            <div class="chart-title">Power Distribution (W)</div>
+            <div style="position: relative;">
+                <div id="chart-power" class="chart"></div>
+                <div id="center-text-power" class="center-text"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="legend" id="legend"></div>
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+    const CONFIG = {
+        width: 700,
+        height: 700,
+        radius: 340,
+        // Google Sheets URL - publié en CSV
+        googleSheetUrl: 'https://docs.google.com/spreadsheets/d/15u-d4Ra5tOuHu4U7vf7_cPGw9DNRAAe8ckBcxM_9zZQ/export?format=csv&gid=846751885',
+        // Pour revenir au fichier local, mettez useGoogleSheet à false
+        csvFile: 'mass_power_simple.csv',
+        useGoogleSheet: true
+    };
+
+    // Couleurs pour les systèmes niveau 1 (S1)
+    const systemColors = {
+        'STABLE Existing Components': '#3498db',
+        'Back End UV Optical Train': '#e74c3c',
+        'Detector Assembly': '#2ecc71',
+        'Calibration Assembly': '#f39c12',
+        'Radiator': '#9b59b6',
+        'Inner Frame Gimbals': '#8e44ad',
+        'SCWI+STABLE Payload Assembly': '#34495e',
+        'Gondola Components': '#95a5a6'
+    };
+
+    function loadData() {
+        const dataUrl = CONFIG.useGoogleSheet ? CONFIG.googleSheetUrl : CONFIG.csvFile;
+
+        d3.csv(dataUrl).then(function(data) {
+            // Convertir les valeurs en nombres
+            data.forEach(d => {
+                d.mass = +d.mass || 0;
+                d.power = +d.power || 0;
+            });
+
+            createVisualization(data, 'mass', '#chart-mass', '#center-text-mass');
+            createVisualization(data, 'power', '#chart-power', '#center-text-power');
+            createLegend();
+        }).catch(function(error) {
+            console.error('Erreur lors du chargement des données:', error);
+            alert('Erreur lors du chargement des données. Vérifiez que le Google Sheet est publié en CSV.');
+        });
+    }
+
+    function createHierarchy(data) {
+        // Créer la structure hiérarchique dynamique depuis le CSV (supporte S0, S1, S2, ... Sn)
+        const hierarchy = { name: 'root', children: [] };
+
+        // Détecter automatiquement le nombre de niveaux
+        const sampleRow = data[0];
+        const maxLevel = Object.keys(sampleRow).filter(k => k.startsWith('S')).length;
+
+        // Map pour garder trace du nœud actuel à chaque niveau
+        const currentNodes = new Array(maxLevel).fill(null);
+
+        data.forEach(row => {
+            const mass = +row.mass || 0;
+            const power = +row.power || 0;
+
+            // Extraire tous les niveaux Sx
+            const levels = [];
+            for (let i = 0; i < maxLevel; i++) {
+                const val = row[`S${i}`];
+                levels.push(val ? val.trim() : '');
+            }
+
+            // Trouver le dernier niveau non-vide
+            let lastNonEmptyLevel = -1;
+            for (let i = 0; i < levels.length; i++) {
+                if (levels[i]) {
+                    lastNonEmptyLevel = i;
+                }
+            }
+
+            // Si aucun niveau n'est défini, ignorer cette ligne
+            if (lastNonEmptyLevel === -1) return;
+
+            // Construire la hiérarchie niveau par niveau
+            let parent = hierarchy;
+
+            for (let level = 0; level <= lastNonEmptyLevel; level++) {
+                const name = levels[level];
+                if (!name) continue;
+
+                // Si c'est le dernier niveau avec mass/power, créer une feuille
+                const isLeaf = (level === lastNonEmptyLevel) && (mass !== 0 || power !== 0);
+
+                if (level > 0) {
+                    parent = currentNodes[level - 1];
+                }
+
+                if (!parent) continue;
+
+                // Créer ou réutiliser le nœud
+                if (isLeaf) {
+                    // C'est une feuille
+                    const leaf = { name: name, mass: mass, power: power };
+                    if (!parent.children) parent.children = [];
+                    parent.children.push(leaf);
+                } else {
+                    // C'est un nœud intermédiaire
+                    const node = { name: name, children: [] };
+                    if (!parent.children) parent.children = [];
+                    parent.children.push(node);
+                    currentNodes[level] = node;
+
+                    // Réinitialiser les niveaux suivants
+                    for (let i = level + 1; i < maxLevel; i++) {
+                        currentNodes[i] = null;
+                    }
+                }
+            }
+        });
+
+        return hierarchy;
+    }
+
+    function createVisualization(data, metric, chartSelector, centerTextSelector) {
+        const hierarchyData = createHierarchy(data);
+
+        const svg = d3.select(chartSelector)
+            .append("svg")
+            .attr("width", CONFIG.width)
+            .attr("height", CONFIG.height);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${CONFIG.width/2},${CONFIG.height/2})`);
+
+        // Créer la hiérarchie et calculer les valeurs
+        const root = d3.hierarchy(hierarchyData)
+            .sum(d => {
+                if (metric === 'mass') {
+                    return d.mass || 0;
+                } else {
+                    return d.power || 0;
+                }
+            })
+            .sort((a, b) => b.value - a.value);
+
+        // Créer la partition
+        const partition = d3.partition()
+            .size([2 * Math.PI, CONFIG.radius]);
+
+        partition(root);
+
+        // Échelle de couleurs
+        const color = d3.scaleOrdinal()
+            .domain(Object.keys(systemColors))
+            .range(Object.values(systemColors));
+
+        // Fonction pour obtenir la couleur (hiérarchie dynamique à n niveaux)
+        function getColor(d) {
+            if (d.depth === 0) return '#ecf0f1'; // root
+
+            if (d.depth === 1) {
+                // S0: couleur neutre/grise
+                return d.data.name === 'SCWI+STABLE Payload Assembly' ? '#7f8c8d' : '#95a5a6';
+            }
+
+            if (d.depth === 2) {
+                // S1: couleur principale
+                return color(d.data.name) || '#bdc3c7';
+            }
+
+            // depth >= 3: versions de plus en plus claires
+            // Remonter jusqu'au S1 parent pour obtenir la couleur de base
+            let ancestor = d;
+            while (ancestor.depth > 2) {
+                ancestor = ancestor.parent;
+            }
+
+            const baseColor = color(ancestor.data.name);
+            if (!baseColor) return '#ecf0f1';
+
+            // Éclaircir progressivement selon la profondeur
+            const brightnessIncrease = 0.4 * (d.depth - 2);
+            return d3.color(baseColor).brighter(brightnessIncrease);
+        }
+
+        // Arc generator
+        const arc = d3.arc()
+            .startAngle(d => d.x0)
+            .endAngle(d => d.x1)
+            .padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.005))
+            .padRadius(CONFIG.radius / 2)
+            .innerRadius(d => d.y0)
+            .outerRadius(d => d.y1 - 1);
+
+        // Dessiner les arcs
+        const path = g.selectAll("path")
+            .data(root.descendants().filter(d => d.depth > 0))
+            .join("path")
+            .attr("class", "arc")
+            .attr("fill", d => getColor(d))
+            .attr("d", arc);
+
+        // Groupe pour les labels
+        const labelGroup = g.append("g");
+
+        // Ajouter les labels avec nom et valeur sur deux lignes
+        root.descendants().filter(d => d.depth > 0).forEach(d => {
+            const angle = (d.x0 + d.x1) / 2;
+            const radius = (d.y0 + d.y1) / 2;
+            const x = radius * Math.cos(angle - Math.PI / 2);
+            const y = radius * Math.sin(angle - Math.PI / 2);
+
+            // Rotation du texte pour suivre l'arc
+            let rotation = angle * 180 / Math.PI - 90;
+            if (rotation > 90) rotation -= 180;
+
+            // Calculer la longueur disponible pour le texte
+            const arcLength = (d.x1 - d.x0) * (d.y0 + d.y1) / 2;
+            const radialWidth = d.y1 - d.y0;
+
+            if (arcLength < 30) return; // Trop petit pour afficher du texte
+
+            const name = d.data.name;
+            const value = d.value.toFixed(1);
+            const unit = metric === 'mass' ? 'kg' : 'W';
+
+            // Déterminer la taille de police en fonction de la profondeur (dynamique)
+            let fontSize;
+            if (d.depth === 1) fontSize = 12; // S0
+            else if (d.depth === 2) fontSize = 11; // S1
+            else {
+                // S2, S3, S4, ... : diminuer progressivement
+                fontSize = Math.max(7, 11 - (d.depth - 2));
+            }
+            const maxChars = Math.floor(arcLength / (fontSize * 0.6));
+
+            // Créer le groupe de label
+            const labelG = labelGroup.append("g")
+                .attr("transform", `translate(${x},${y}) rotate(${rotation})`);
+
+            // Détecter les sauts de ligne dans le nom
+            const nameLines = name.split('\n').map(line => line.trim()).filter(line => line);
+            const hasMultipleLines = nameLines.length > 1;
+
+            // Calculer l'espace nécessaire pour les lignes du nom + la valeur
+            const totalLinesNeeded = nameLines.length + 1; // +1 pour la valeur
+            const lineHeight = 1.1; // em
+            const totalHeight = totalLinesNeeded * lineHeight * fontSize;
+            const hasSpaceForAll = radialWidth > totalHeight;
+
+            const nameText = labelG.append("text")
+                .attr("class", "arc-label")
+                .attr("text-anchor", "middle")
+                .style("font-size", fontSize + "px");
+
+            if (hasSpaceForAll && maxChars > 5) {
+                // Afficher le nom sur plusieurs lignes + la valeur
+                const startDy = -(nameLines.length - 1) * 0.5 * lineHeight;
+
+                nameLines.forEach((line, i) => {
+                    let displayLine = line;
+                    if (line.length > maxChars) {
+                        displayLine = line.substring(0, maxChars - 3) + "...";
+                    }
+
+                    nameText.append("tspan")
+                        .attr("x", 0)
+                        .attr("dy", i === 0 ? `${startDy}em` : `${lineHeight}em`)
+                        .text(displayLine);
+                });
+
+                // Ajouter la valeur sur une dernière ligne
+                nameText.append("tspan")
+                    .attr("x", 0)
+                    .attr("dy", `${lineHeight}em`)
+                    .style("font-size", (fontSize - 1) + "px")
+                    .text(`${value} ${unit}`);
+
+            } else if (hasMultipleLines) {
+                // Pas assez d'espace pour tout : afficher seulement le nom sur plusieurs lignes
+                const startDy = -(nameLines.length - 1) * 0.5 * lineHeight;
+
+                nameLines.forEach((line, i) => {
+                    let displayLine = line;
+                    if (line.length > maxChars) {
+                        displayLine = line.substring(0, maxChars - 3) + "...";
+                    }
+
+                    nameText.append("tspan")
+                        .attr("x", 0)
+                        .attr("dy", i === 0 ? `${startDy}em` : `${lineHeight}em`)
+                        .text(displayLine);
+                });
+
+            } else if (maxChars > name.length) {
+                // Une seule ligne simple
+                nameText.append("tspan")
+                    .attr("x", 0)
+                    .attr("dy", "0.35em")
+                    .text(name);
+            } else {
+                // Nom tronqué
+                nameText.append("tspan")
+                    .attr("x", 0)
+                    .attr("dy", "0.35em")
+                    .text(name.substring(0, maxChars - 3) + "...");
+            }
+        });
+
+        // Tooltip
+        const tooltip = d3.select("#tooltip");
+
+        function showTooltip(event, d) {
+            const unit = metric === 'mass' ? 'kg' : 'W';
+            const value = d.value.toFixed(2);
+            const percentage = ((d.value / root.value) * 100).toFixed(1);
+
+            let content = `<div class="tooltip-title">${d.data.name}</div>`;
+            content += `<div class="tooltip-content">`;
+            content += `${metric === 'mass' ? 'Mass' : 'Power'}: ${value} ${unit}<br>`;
+            content += `Percentage: ${percentage}%`;
+
+            // Afficher les détails mass/power pour toutes les feuilles (n'importe quelle profondeur)
+            if (d.data.mass !== undefined && d.data.power !== undefined && !d.children) {
+                content += `<br><br>Mass: ${d.data.mass} kg<br>Power: ${d.data.power} W`;
+            }
+            content += `</div>`;
+
+            tooltip.html(content);
+            tooltip.classed("visible", true)
+                .style("left", (event.pageX + 15) + "px")
+                .style("top", (event.pageY - 20) + "px");
+
+            // Mettre à jour le texte central
+            updateCenterText(d, centerTextSelector, metric, root);
+        }
+
+        function hideTooltip() {
+            tooltip.classed("visible", false);
+            updateCenterText(root, centerTextSelector, metric, root);
+        }
+
+        // Event listeners
+        path.on("mouseenter", showTooltip)
+            .on("mousemove", function(event) {
+                tooltip.style("left", (event.pageX + 15) + "px")
+                    .style("top", (event.pageY - 20) + "px");
+            })
+            .on("mouseleave", hideTooltip);
+
+        // Initialiser le texte central
+        updateCenterText(root, centerTextSelector, metric, root);
+    }
+
+    function updateCenterText(d, selector, metric, root) {
+        const centerText = d3.select(selector);
+        const unit = metric === 'mass' ? 'kg' : 'W';
+
+        centerText.html(`
+            <div class="center-value">${d.value.toFixed(1)} ${unit}</div>
+            <div class="center-label">${d.data.name !== 'root' ? d.data.name : 'Total'}</div>
+        `);
+    }
+
+    function createLegend() {
+        const legend = d3.select("#legend");
+        legend.html("");
+
+        // Afficher seulement les systèmes S1 dans la légende
+        const s1Systems = [
+            'STABLE Existing Components',
+            'Back End UV Optical Train',
+            'Detector Assembly',
+            'Calibration Assembly',
+            'Radiator',
+            'Inner Frame Gimbals'
+        ];
+
+        s1Systems.forEach(system => {
+            const color = systemColors[system];
+            if (color) {
+                const item = legend.append("div")
+                    .attr("class", "legend-item");
+
+                item.append("div")
+                    .attr("class", "legend-color")
+                    .style("background-color", color);
+
+                item.append("span")
+                    .text(system);
+            }
+        });
+    }
+
+    // Charger les données au démarrage
+    loadData();
+    </script>
+</body>
+</html>
